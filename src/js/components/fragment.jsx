@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 const Fragment = (props) => {
   const { success, id, type } = props;
   const statusClass = success ? 'fragment-status-success' : 'fragment-status-failure';
-
+  function handleClick(event) {
+    console.log(event.currentTarget);
+  }
   return (
-    <div className="fragment-item">
+    <div role="menuitem" className="fragment-item" tabIndex="0" onClick={handleClick} onKeyDown={handleClick}>
       <div className="fragment-status-wrapper">
         <div className={`fragment-status ${statusClass}`} />
       </div>
