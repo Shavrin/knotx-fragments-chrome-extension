@@ -3,6 +3,8 @@
 }
 
 .fragment {
+  color: lightgrey;
+
   &-list {
     border: 1px solid red;
     display: flex;
@@ -10,22 +12,21 @@
     align-items: stretch;
   }
   &-item {
-    border: 1px solid blue;
     display: flex;
-    background-color: #b9b9b9;
-    &:nth-child(2n) {
-      background-color: white;
+    &:nth-child(2n + 1) {
+      background-color: #ffffff13;
     }
     &:hover {
-      background-color: pink;
+      background-color: #0026ff34;
     }
-    > div {
-      border: 1px dotted palevioletred;
+    &-active {
+      background-color: #2445ff34;
     }
   }
   &-status-wrapper {
     height: 15px;
     width: 15px;
+    margin: 2px;
   }
   &-status {
     width: 100%;

@@ -15,11 +15,11 @@
  */
 
 import React from 'react';
-import ExampleGraph from '../components/Graphs/exampleGraph';
+import FragmentList from '../components/fragmentList';
 
 const App = () => (
   <div className="app">
-    <ExampleGraph />
+    <FragmentList />
   </div>
 );
 
