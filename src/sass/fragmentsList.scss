@@ -3,7 +3,6 @@
 }
 
 .fragment {
-
   &-list {
     color: lightgrey;
     display: flex;
@@ -20,10 +19,10 @@
     }
     &:focus {
       background-color: #0026ff34;
-      outline: none;
     }
-    &-active {
-      background-color: #2445ff34;
+    &.expanded {
+      background-color: #ff24f434;
+      height: 50px;
     }
   }
   &-status-wrapper {
