@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import NodeList from './nodeList';
 
 const Fragment = (props) => {
   const { success, id, type } = props;
@@ -27,7 +28,10 @@ const Fragment = (props) => {
       <div className="fragment-status-wrapper">
         <div className={`fragment-status ${statusClass}`} />
       </div>
-      <div className="fragment-id">{id}</div>
+      <div className="fragment-id">
+        {id}
+        <NodeList />
+      </div>
       <div className="fragment-type">{type}</div>
     </div>
   );

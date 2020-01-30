@@ -11,6 +11,7 @@
   }
   &-item {
     display: flex;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.144);
     &:nth-child(2n + 1) {
       background-color: #ffffff13;
     }
@@ -22,7 +23,6 @@
     }
     &.expanded {
       background-color: #ff24f434;
-      height: 50px;
     }
   }
   &-status-wrapper {
@@ -49,5 +49,29 @@
     &-failure {
       background-color: red;
     }
+  }
+}
+
+.node {
+  &-list {
+    display: none;
+  }
+  &-button {
+    background-color: transparent;
+    border: 0;
+    width: 100%;
+    color: lightgrey;
+    text-align: start;
+    &:hover {
+      background-color: #ffffff5b;
+    }
+  }
+}
+
+.expanded .node-list {
+  display: block;
+  background-color: #add8e625;
+  &:nth-child(2n + 1) {
+    background-color: #add8e633;
   }
 }
