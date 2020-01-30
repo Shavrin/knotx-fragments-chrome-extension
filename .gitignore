@@ -15,9 +15,16 @@ Thumbs.db
 **/build/
 **/out/
 
+# Visual Studio Code #
+######################
+.vscode
+
 # Other              #
 ######################
 *.iml
 *.iws
 *.ipr
 *.vlt
+
+node_modules
+dist/main.js
