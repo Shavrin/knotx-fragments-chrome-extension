@@ -1,5 +1,4 @@
 import React from 'react';
-import * as data from './data.json';
 import Fragment from './fragment';
 
 const FragmentList = () => (
