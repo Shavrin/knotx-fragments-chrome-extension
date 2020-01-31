@@ -17,10 +17,14 @@
 import React from 'react';
 import FragmentList from '../components/fragmentList';
 
-const App = () => (
-  <div className="app">
-    <FragmentList />
-  </div>
-);
+const App = () => {
+  const { themeName } = chrome.devtools.panels;
+  const theme = themeName === 'default' ? '' : 'dark-theme';
+  return (
+    <div className={`app ${theme}`}>
+      <FragmentList />
+    </div>
+  );
+};
 
 export default App;

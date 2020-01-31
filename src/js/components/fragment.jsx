@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import NodeList from './nodeList';
 
-const Fragment = (props) => {
-  const { success, id, type } = props;
+const Fragment = ({ success, id, type }) => {
   const [expanded, setExpanded] = useState(false);
   const fragment = useRef(null);
   useEffect(() => {
@@ -24,7 +23,14 @@ const Fragment = (props) => {
     }
   }
   return (
-    <div ref={fragment} role="menuitem" className="fragment-item" tabIndex="0" onClick={handleClick} onKeyDown={handleEnter}>
+    <div
+      ref={fragment}
+      role="menuitem"
+      className="fragment-item"
+      tabIndex="0"
+      onClick={handleClick}
+      onKeyDown={handleEnter}
+    >
       <div className="fragment-status-wrapper">
         <div className={`fragment-status ${statusClass}`} />
       </div>

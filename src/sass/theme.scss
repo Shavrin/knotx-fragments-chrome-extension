@@ -1,0 +1,25 @@
+$default: (
+  textColor: #2c2c2c,
+  highlight: #0056d827,
+  oddItemBackgroundColor: #dcdcdc44,
+  borderColor: #adadad56,
+  nodeHighlight: #0e000034,
+  oddNodeBackgroundColor: #add8e60e
+);
+
+$dark: (
+  textColor: #d3d3d3,
+  highlight: #0026ff34,
+  oddItemBackgroundColor: #ffffff13,
+  borderColor: #dcdcdc44,
+  nodeHighlight: #8fe3ff42,
+  oddNodeBackgroundColor: #add8e60e
+);
+
+@function colorDarkTheme($key) {
+  @return map-get($dark, $key);
+}
+
+@function colorDefaultTheme($key) {
+  @return map-get($default, $key);
+}
