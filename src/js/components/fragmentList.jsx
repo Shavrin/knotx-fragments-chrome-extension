@@ -13,13 +13,13 @@ const FragmentList = () => {
       status: 'missing', id: 'c', type: 'diff', time: '3',
     },
     {
-      status: 'other', id: 'ddasdafsdfsffsdf', type: 'action', time: '4',
+      status: 'other', id: 'ddasdafsdf3sffsdf', type: 'action', time: '4',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '5',
+      status: 'unprocessed', id: 'ddasdafsdf2sffsdf', type: 'action', time: '5',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '6',
+      status: 'success', id: 'ddasdafsd1fsffsdf', type: 'action', time: '6',
     },
     {
       status: 'success', id: 'd', type: 'action', time: '7',
@@ -31,19 +31,22 @@ const FragmentList = () => {
       status: 'success', id: 'f', type: 'action', time: '9',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '1123',
+      status: 'success', id: 'ddasdafsdqfsffsdf', type: 'action', time: '1123',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '11',
+      status: 'success', id: 'ddasdafsdzfsffsdf', type: 'action', time: '11',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '12',
+      status: 'success', id: 'ddasdafsdfbsffsdf', type: 'action', time: '12',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '13',
+      status: 'success', id: 'ddasdafsdfsffdsdf', type: 'action', time: '13',
     },
     {
-      status: 'success', id: 'ddasdafsdfsffsdf', type: 'action', time: '1',
+      status: 'success', id: 'ddasdafsdfssffsdf', type: 'action', time: '1',
+    },
+    {
+      status: 'error', id: 'asdasdasd', type: 'action', time: '223',
     },
   ];
 
@@ -51,7 +54,7 @@ const FragmentList = () => {
     status, id, type, time,
   }) => (
     <Fragment
-      key={time}
+      key={id}
       status={status}
       id={id}
       type={type}
@@ -74,7 +77,6 @@ const FragmentList = () => {
 
   const fragmentsSortedByTime = sortByProcessingTime(parsedData);
   const [fragments, setFragments] = useState(fragmentsSortedByTime);
-
 
   function sortByStatus() {
     function getStatusSortWeight(status) {
@@ -100,6 +102,7 @@ const FragmentList = () => {
       }
       return sortWeight;
     }
+
     const sortedFragments = fragments.concat().sort((a, b) => {
       const { status: statusA } = a.props;
       const { status: statusB } = b.props;
@@ -117,16 +120,18 @@ const FragmentList = () => {
     const sortedFragments = fragments.concat().sort((a, b) => a.props.id.localeCompare(b.props.id));
     setFragments(sortedFragments);
   }
+
   function sortByType() {
     const sortedFragments = fragments.concat().sort((a, b) => a.props.type.localeCompare(b.props.type));
     setFragments(sortedFragments);
   }
+
   return (
     <div className="fragment-list">
       <div className="fragment-sorting">
-        <button type="button" className="fragment-sorting-status" onClick={sortByStatus}>^</button>
-        <button type="button" className="fragment-sorting-id" onClick={sortById}>^</button>
-        <button type="button" className="fragment-sorting-type" onClick={sortByType}>^</button>
+        <button type="button" className="fragment-sorting-status" onClick={sortByStatus}>&darr;</button>
+        <button type="button" className="fragment-sorting-id" onClick={sortById}>ID &darr;</button>
+        <button type="button" className="fragment-sorting-type" onClick={sortByType}>TYPE &darr;</button>
       </div>
       {fragments}
     </div>

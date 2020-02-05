@@ -12,9 +12,11 @@
     & button {
       border: 0;
       margin: 2px;
-      text-align: end;
+      padding: 2px;
+      color: white;
+      background-color: #6e6e6e;
       &:active {
-        background-color: colorDefaultTheme("oddItemBackgroundColor");
+        background-color: colorDefaultTheme("highlight");
       }
     }
     &-status {
