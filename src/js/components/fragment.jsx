@@ -21,6 +21,7 @@ import NodeList from './nodeList';
 const Fragment = ({ status, id, type }) => {
   const [expanded, setExpanded] = useState(false);
   const fragment = useRef(null);
+
   useEffect(() => {
     if (expanded) {
       fragment.current.classList.add('expanded');
@@ -54,11 +55,13 @@ const Fragment = ({ status, id, type }) => {
     event.preventDefault();
     setExpanded(!expanded);
   }
+
   function handleEnter(event) {
     if (event.keyCode === 13) {
       setExpanded(!expanded);
     }
   }
+
   return (
     <div
       ref={fragment}
