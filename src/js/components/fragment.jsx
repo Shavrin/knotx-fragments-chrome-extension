@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import NodeList from './nodeList';
 
-const Fragment = ({ success, id, type }) => {
+const Fragment = ({ status, id, type }) => {
   const [expanded, setExpanded] = useState(false);
   const fragment = useRef(null);
   useEffect(() => {
@@ -12,7 +12,28 @@ const Fragment = ({ success, id, type }) => {
       fragment.current.classList.remove('expanded');
     }
   }, [expanded]);
-  const statusClass = success ? 'fragment-status-success' : 'fragment-status-failure';
+
+  let statusClass = '';
+  switch (status) {
+    case 'success':
+      statusClass = 'fragment-status-success';
+      break;
+    case 'error':
+      statusClass = 'fragment-status-error';
+      break;
+    case 'other':
+      statusClass = 'fragment-status-warning';
+      break;
+    case 'missing':
+      statusClass = 'fragment-status-warning';
+      break;
+    case 'unprocessed':
+      statusClass = 'fragment-status-unprocessed';
+      break;
+    default:
+      break;
+  }
+
   function handleClick(event) {
     event.preventDefault();
     setExpanded(!expanded);
@@ -44,13 +65,13 @@ const Fragment = ({ success, id, type }) => {
 };
 
 Fragment.defaultProps = {
-  success: false,
+  status: 'null',
   id: '-1',
   type: 'null',
 };
 
 Fragment.propTypes = {
-  success: PropTypes.bool,
+  status: PropTypes.string,
   id: PropTypes.string,
   type: PropTypes.string,
 };

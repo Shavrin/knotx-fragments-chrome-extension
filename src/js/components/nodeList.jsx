@@ -10,6 +10,7 @@ const NodeList = () => {
 
     chrome.devtools.inspectedWindow.eval(query);
   }
+
   return (
     <div className="node-list">
       <button type="button" className="node-button" onClick={inspectNode}>node 1</button>

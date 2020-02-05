@@ -6,8 +6,25 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    :focus {
-      outline: none;
+  }
+  &-sorting {
+    display: flex;
+    & button {
+      border: 0;
+      margin: 2px;
+      text-align: end;
+      &:active {
+        background-color: colorDefaultTheme("oddItemBackgroundColor");
+      }
+    }
+    &-status {
+      width: 15px;
+    }
+    &-id {
+      flex: 1;
+    }
+    &-type {
+      flex: 1;
     }
   }
   &-item {
@@ -37,6 +54,7 @@
     border-radius: 50%;
   }
   &-id {
+    overflow: hidden;
     flex: 1;
     border-right: 1px solid colorDefaultTheme("borderColor");
   }
@@ -47,8 +65,14 @@
     &-success {
       background-color: #01a101;
     }
-    &-failure {
+    &-error {
       background-color: #ff0000;
+    }
+    &-warning {
+      background-color: #ffbb00;
+    }
+    &-unprocessed {
+      background-color: #a7a7a7;
     }
   }
 }
