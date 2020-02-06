@@ -14,42 +14,57 @@
  * limitations under the License.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import NodeList from './nodeList';
+
+const StyledFragment = styled.div`
+    display: flex;
+    border-bottom: 1px solid #dcdcdc44;
+    color: #d3d3d3;
+    &:nth-child(2n + 1) {
+      background-color: #ffffff13;
+    }
+    &:hover {
+      background-color: #0026ff34;
+    }
+    &:focus {
+      background-color: #0026ff34;
+    }
+`;
+
+const StatusWrapper = styled.div`
+    height: 15px;
+    width: 15px;
+    margin: 2px;
+`;
+
+const Status = styled.div`
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    background-color: ${(props) => (props.status === 'success' ? '#01a101' : '')};
+    background-color: ${(props) => (props.status === 'error' ? '#ff0000' : '')};
+    background-color: ${(props) => (props.status === 'unprocessed' ? '#a7a7a7' : '')};
+    background-color: ${(props) => (props.status === 'other' ? '#ffbb00' : '')};
+    background-color: ${(props) => (props.status === 'missing' ? '#ffbb00' : '')};
+`;
+
+const Id = styled.div`
+    overflow: hidden;
+    flex: 1;
+    border-right: 1px solid #dcdcdc44;
+`;
+
+const Type = styled.div`
+    flex: 1;
+`;
 
 const Fragment = ({ status, id, type }) => {
   const [expanded, setExpanded] = useState(false);
   const fragment = useRef(null);
-
-  useEffect(() => {
-    if (expanded) {
-      fragment.current.classList.add('expanded');
-    } else {
-      fragment.current.classList.remove('expanded');
-    }
-  }, [expanded]);
-
-  let statusClass = '';
-  switch (status) {
-    case 'success':
-      statusClass = 'fragment-status-success';
-      break;
-    case 'error':
-      statusClass = 'fragment-status-error';
-      break;
-    case 'other':
-      statusClass = 'fragment-status-warning';
-      break;
-    case 'missing':
-      statusClass = 'fragment-status-warning';
-      break;
-    case 'unprocessed':
-      statusClass = 'fragment-status-unprocessed';
-      break;
-    default:
-      break;
-  }
 
   function handleClick(event) {
     event.preventDefault();
@@ -63,23 +78,22 @@ const Fragment = ({ status, id, type }) => {
   }
 
   return (
-    <div
+    <StyledFragment
       ref={fragment}
-      role="menuitem"
-      className="fragment-item"
       tabIndex="0"
       onClick={handleClick}
       onKeyDown={handleEnter}
+      expanded={expanded}
     >
-      <div className="fragment-status-wrapper">
-        <div className={`fragment-status ${statusClass}`} />
-      </div>
-      <div className="fragment-id">
+      <StatusWrapper>
+        <Status status={status} />
+      </StatusWrapper>
+      <Id>
         {id}
-        <NodeList />
-      </div>
-      <div className="fragment-type">{type}</div>
-    </div>
+        <NodeList expanded={expanded} />
+      </Id>
+      <Type>{type}</Type>
+    </StyledFragment>
   );
 };
 

@@ -18,7 +18,18 @@
 
 import React, { useEffect } from 'react';
 import vis from 'vis-network';
+import styled from 'styled-components';
 import { drawGraph } from '../../helpers/graphsHelper';
+
+const GraphContainer = styled.div`
+    width: 40vw;
+    height: 100vh;
+`;
+
+const Graph = styled.div`
+        height: 100%;
+        width: 100%;
+`;
 
 const exampleGraphDeclaration = {
   nodes: new vis.DataSet([
@@ -65,12 +76,9 @@ const ExampleGraph = () => {
   }, []);
 
   return (
-    <div className="graphContainer">
-      <div
-        id="exampleGraph"
-        className="graph"
-      />
-    </div>
+    <GraphContainer>
+      <Graph id="exampleGraph" />
+    </GraphContainer>
   );
 };
 

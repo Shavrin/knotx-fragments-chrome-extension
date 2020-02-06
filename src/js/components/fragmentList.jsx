@@ -15,7 +15,51 @@
  */
 
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Fragment from './fragment';
+
+const StyledFragmentList = styled.div`
+  color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`;
+
+const SortingWrapper = styled.div`
+    display: flex;
+    &-status {
+    }
+    &-id {
+      flex: 1;
+    }
+    &-type {
+      flex: 1;
+    }
+`;
+
+const SortingButton = styled.button`
+      border: 0;
+      margin: 2px;
+      padding: 2px;
+      color: white;
+      background-color: #6e6e6e;
+      &:active {
+        background-color: #0056d827;
+      }
+`;
+
+const SortingButtonStatus = styled(SortingButton)`
+      width: 15px;
+`;
+
+const SortingButtonId = styled(SortingButton)`
+      flex: 1;
+`;
+
+const SortingButtonType = styled(SortingButton)`
+      flex: 1;
+`;
+
 
 const FragmentList = () => {
   const mockData = [
@@ -143,14 +187,14 @@ const FragmentList = () => {
   }
 
   return (
-    <div className="fragment-list">
-      <div className="fragment-sorting">
-        <button type="button" className="fragment-sorting-status" onClick={sortByStatus}>&darr;</button>
-        <button type="button" className="fragment-sorting-id" onClick={sortById}>ID &darr;</button>
-        <button type="button" className="fragment-sorting-type" onClick={sortByType}>TYPE &darr;</button>
-      </div>
+    <StyledFragmentList>
+      <SortingWrapper>
+        <SortingButtonStatus onClick={sortByStatus}>&darr;</SortingButtonStatus>
+        <SortingButtonId onClick={sortById}>ID&darr;</SortingButtonId>
+        <SortingButtonType onClick={sortByType}>TYPE&darr;</SortingButtonType>
+      </SortingWrapper>
       {fragments}
-    </div>
+    </StyledFragmentList>
   );
 };
 
