@@ -16,6 +16,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Fragment from './fragment';
 
 const StyledFragmentList = styled.div`
@@ -61,65 +62,67 @@ const SortingButtonType = styled(SortingButton)`
 
 
 const FragmentList = () => {
-  const mockData = [
-    {
-      status: 'success', id: 'a', type: 'action', time: '110',
-    },
-    {
-      status: 'error', id: 'b', type: 'action', time: '2',
-    },
-    {
-      status: 'missing', id: 'c', type: 'diff', time: '3',
-    },
-    {
-      status: 'other', id: 'ddasdafsdf3sffsdf', type: 'action', time: '4',
-    },
-    {
-      status: 'unprocessed', id: 'ddasdafsdf2sffsdf', type: 'action', time: '5',
-    },
-    {
-      status: 'success', id: 'ddasdafsd1fsffsdf', type: 'action', time: '6',
-    },
-    {
-      status: 'success', id: 'd', type: 'action', time: '7',
-    },
-    {
-      status: 'success', id: 'e', type: 'action', time: '8',
-    },
-    {
-      status: 'success', id: 'f', type: 'action', time: '9',
-    },
-    {
-      status: 'success', id: 'ddasdafsdqfsffsdf', type: 'action', time: '1123',
-    },
-    {
-      status: 'success', id: 'ddasdafsdzfsffsdf', type: 'action', time: '11',
-    },
-    {
-      status: 'success', id: 'ddasdafsdfbsffsdf', type: 'action', time: '12',
-    },
-    {
-      status: 'success', id: 'ddasdafsdfsffdsdf', type: 'action', time: '13',
-    },
-    {
-      status: 'success', id: 'ddasdafsdfssffsdf', type: 'action', time: '1',
-    },
-    {
-      status: 'error', id: 'asdasdasd', type: 'action', time: '223',
-    },
-  ];
+  // const mockData = [
+  //   {
+  //     status: 'success', id: 'a', type: 'action', time: '110',
+  //   },
+  //   {
+  //     status: 'error', id: 'b', type: 'action', time: '2',
+  //   },
+  //   {
+  //     status: 'missing', id: 'c', type: 'diff', time: '3',
+  //   },
+  //   {
+  //     status: 'other', id: 'ddasdafsdf3sffsdf', type: 'action', time: '4',
+  //   },
+  //   {
+  //     status: 'unprocessed', id: 'ddasdafsdf2sffsdf', type: 'action', time: '5',
+  //   },
+  //   {
+  //     status: 'success', id: 'ddasdafsd1fsffsdf', type: 'action', time: '6',
+  //   },
+  //   {
+  //     status: 'success', id: 'd', type: 'action', time: '7',
+  //   },
+  //   {
+  //     status: 'success', id: 'e', type: 'action', time: '8',
+  //   },
+  //   {
+  //     status: 'success', id: 'f', type: 'action', time: '9',
+  //   },
+  //   {
+  //     status: 'success', id: 'ddasdafsdqfsffsdf', type: 'action', time: '1123',
+  //   },
+  //   {
+  //     status: 'success', id: 'ddasdafsdzfsffsdf', type: 'action', time: '11',
+  //   },
+  //   {
+  //     status: 'success', id: 'ddasdafsdfbsffsdf', type: 'action', time: '12',
+  //   },
+  //   {
+  //     status: 'success', id: 'ddasdafsdfsffdsdf', type: 'action', time: '13',
+  //   },
+  //   {
+  //     status: 'success', id: 'ddasdafsdfssffsdf', type: 'action', time: '1',
+  //   },
+  //   {
+  //     status: 'error', id: 'asdasdasd', type: 'action', time: '223',
+  //   },
+  // ];
 
-  const parsedData = mockData.map(({
-    status, id, type, time,
-  }) => (
-    <Fragment
-      key={id}
-      status={status}
-      id={id}
-      type={type}
-      time={time}
-    />
-  ));
+  function mapDataToComponents(data) {
+    return data.map(({
+      status, id, type, time,
+    }) => (
+      <Fragment
+        key={id}
+        status={status}
+        id={id}
+        type={type}
+        time={time}
+      />
+    ));
+  }
 
   function sortByProcessingTime(fragments) {
     const sortedFragments = fragments.concat().sort(
@@ -134,8 +137,10 @@ const FragmentList = () => {
     return sortedFragments;
   }
 
-  const fragmentsSortedByTime = sortByProcessingTime(parsedData);
-  const [fragments, setFragments] = useState(fragmentsSortedByTime);
+  const data = useSelector(({ pageData }) => pageData.fragments);
+  const parsedData = mapDataToComponents(data);
+  const sortedFragmentsByTime = sortByProcessingTime(parsedData);
+  const [fragments, setFragments] = useState(sortedFragmentsByTime);
 
   function sortByStatus() {
     function getStatusSortWeight(status) {

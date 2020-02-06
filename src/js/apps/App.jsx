@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import FragmentList from '../components/fragmentList';
+import FragmentList from '../components/FragmentList/fragmentList';
 
 const defaultTheme = {
   textColor: '#2c2c2c',
