@@ -21,16 +21,18 @@ import NodeList from './nodeList';
 
 const StyledFragment = styled.div`
     display: flex;
-    border-bottom: 1px solid #dcdcdc44;
-    color: #d3d3d3;
+    border-bottom: 1px solid ${({ theme }) => theme.borderColor};
+    color: ${({ theme }) => theme.textColor};
+    background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
     &:nth-child(2n + 1) {
-      background-color: #ffffff13;
+      background-color: ${({ theme }) => theme.oddFragmentBgColor};;
+      background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
     }
     &:hover {
-      background-color: #0026ff34;
+      background-color: ${({ theme }) => theme.fragmentHighlight};
     }
     &:focus {
-      background-color: #0026ff34;
+      background-color: ${({ theme }) => theme.fragmentHighlight};
     }
 `;
 
@@ -45,17 +47,17 @@ const Status = styled.div`
     height: 100%;
     border-radius: 50%;
 
-    background-color: ${(props) => (props.status === 'success' ? '#01a101' : '')};
-    background-color: ${(props) => (props.status === 'error' ? '#ff0000' : '')};
-    background-color: ${(props) => (props.status === 'unprocessed' ? '#a7a7a7' : '')};
-    background-color: ${(props) => (props.status === 'other' ? '#ffbb00' : '')};
-    background-color: ${(props) => (props.status === 'missing' ? '#ffbb00' : '')};
+    background-color: ${({ status }) => (status === 'success' ? '#01a101' : '')};
+    background-color: ${({ status }) => (status === 'error' ? '#ff0000' : '')};
+    background-color: ${({ status }) => (status === 'unprocessed' ? '#a7a7a7' : '')};
+    background-color: ${({ status }) => (status === 'other' ? '#ffbb00' : '')};
+    background-color: ${({ status }) => (status === 'missing' ? '#ffbb00' : '')};
 `;
 
 const Id = styled.div`
     overflow: hidden;
     flex: 1;
-    border-right: 1px solid #dcdcdc44;
+    border-right: 1px solid ${({ theme }) => theme.borderColor};;
 `;
 
 const Type = styled.div`

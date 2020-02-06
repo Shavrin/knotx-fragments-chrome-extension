@@ -19,23 +19,23 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 
 const StyledNodeList = styled.div`
-    display: ${(props) => (props.expanded === true ? 'block' : 'none')};
+    display: ${({ expanded }) => (expanded ? 'block' : 'none')};
 `;
 
 const NodeButton = styled.button`
     background-color: transparent;
     border: 0;
     width: 100%;
-    color: #d3d3d3;
+    color: ${({ theme }) => theme.textColor};
     text-align: start;
-    border-bottom: 1px solid #dcdcdc44;
+    border-bottom: 1px solid ${({ theme }) => theme.borderColor};
     &:hover {
-      background-color: #0e000034;
+      background-color: ${({ theme }) => theme.nodeHighlight};
     }
     &:nth-child(2n + 1) {
-      background-color: #add8e60e;
+      background-color: ${({ theme }) => theme.oddNodeBgColor};
       &:hover {
-        background-color: #0e000034;
+        background-color: ${({ theme }) => theme.nodeHighlight};
       }
     }
 `;

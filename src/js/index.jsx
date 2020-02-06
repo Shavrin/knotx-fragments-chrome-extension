@@ -17,7 +17,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './apps/App';
-import '../sass/style.scss';
 import { knotxNodes } from './helpers/nodesHelper';
 
 chrome.devtools.panels.create('knotx', null, 'index.html');

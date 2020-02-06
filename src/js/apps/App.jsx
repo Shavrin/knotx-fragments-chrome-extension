@@ -15,15 +15,39 @@
  */
 
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import FragmentList from '../components/fragmentList';
+
+const defaultTheme = {
+  textColor: '#2c2c2c',
+  buttonBgColor: '#c1c1c1',
+  fragmentHighlight: '#0056d827',
+  borderColor: '#adadad56',
+  oddFragmentBgColor: '#dcdcdc44',
+  nodeHighlight: '#0e000034',
+  oddNodeBgColor: '#54545414',
+};
+
+const darkTheme = {
+  textColor: '#d3d3d3',
+  buttonBgColor: '#6e6e6e',
+  fragmentHighlight: '#0026ff34',
+  borderColor: '#dcdcdc44',
+  oddFragmentBgColor: '#ffffff13',
+  nodeHighlight: '#8fe3ff42',
+  oddNodeBgColor: '#add8e60e',
+};
 
 const App = () => {
   const { themeName } = chrome.devtools.panels;
-  const theme = themeName === 'default' ? '' : 'dark-theme';
+  const theme = themeName === 'default' ? defaultTheme : darkTheme;
+
   return (
-    <div className={`app ${theme}`}>
-      <FragmentList />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="app">
+        <FragmentList />
+      </div>
+    </ThemeProvider>
   );
 };
 

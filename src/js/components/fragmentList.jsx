@@ -19,7 +19,6 @@ import styled from 'styled-components';
 import Fragment from './fragment';
 
 const StyledFragmentList = styled.div`
-  color: #2c2c2c;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -41,10 +40,10 @@ const SortingButton = styled.button`
       border: 0;
       margin: 2px;
       padding: 2px;
-      color: white;
-      background-color: #6e6e6e;
+      color: ${({ theme }) => theme.textColor};
+      background-color: ${({ theme }) => theme.buttonBgColor};
       &:active {
-        background-color: #0056d827;
+        background-color: ${({ theme }) => theme.fragmentHighlight};
       }
 `;
 
