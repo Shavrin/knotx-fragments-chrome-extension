@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Store } from 'webext-redux';
-import { Provider } from 'react-redux';
-import App from './apps/App';
-import { REDUX_PORT, PANEL_NAME } from './helpers/constants';
+import { knotxNodes } from '../helpers/nodesHelper';
+import { status } from '../helpers/constants';
 
-const store = new Store({ portName: REDUX_PORT });
-
-chrome.devtools.panels.create(PANEL_NAME, null, 'index.html');
-
-store.ready().then(() => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root'),
-  );
-});
+window.onload = () => {
+  chrome.runtime.sendMessage({ fragmentsData: knotxNodes() }, (response) => {
+    /* eslint-disable no-console */
+    if (response.status === status.error) {
+      console.warn(response.msg);
+    }
+    if (response.status === status.succes) {
+      console.log(response.msg);
+    }
+    /* eslint-enable no-console */
+  });
+};

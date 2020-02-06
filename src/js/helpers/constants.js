@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Store } from 'webext-redux';
-import { Provider } from 'react-redux';
-import App from './apps/App';
-import { REDUX_PORT, PANEL_NAME } from './helpers/constants';
+// CONSTANTS
+export const REDUX_PORT = 'REDUX_PORT';
+export const PANEL_NAME = 'Knot.x';
+export const status = {
+  succes: 'succes',
+  error: 'error',
+};
 
-const store = new Store({ portName: REDUX_PORT });
+// MESSAGES
+/* eslint-disable max-len */
 
-chrome.devtools.panels.create(PANEL_NAME, null, 'index.html');
+export const errorMsgs = {
+  getPageData: 'Knot.x devtool extension: Something gone wrong, or your page does not use Knot.x :( ',
+};
 
-store.ready().then(() => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root'),
-  );
-});
+export const succesMsgs = {
+  getPageData: 'Knot.x devtool extension: Succesfully get fragments and page data. You can start using Knot.x extension',
+};
+
+/* eslint-enable max-len */
