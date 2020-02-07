@@ -20,42 +20,8 @@ import { Store } from 'webext-redux';
 import { Provider } from 'react-redux';
 import App from './apps/App';
 import { REDUX_PORT, PANEL_NAME } from './helpers/constants';
-import * as fragmentsJson from '../../data.json';
 
 const store = new Store({ portName: REDUX_PORT });
-
-function parseData(data) {
-  const iterateOverObject = (obj) => {
-    const filterFragmentData = (fragment) => ({
-      id: fragment.id,
-      status: fragment.status,
-      type: fragment.type,
-      started: fragment.response?.invocations[0].started ?? '-1',
-      finished: fragment.response?.invocations[0].finished ?? '-1',
-    });
-
-    const iterate = (object, array) => {
-      Object.keys(object).forEach((key) => {
-        if (key === 'id') {
-          array.push(filterFragmentData(object));
-        }
-        if (typeof object[key] === 'object') {
-          iterate(object[key], array);
-        }
-      });
-    };
-    const fragments = [];
-    iterate(obj, fragments);
-    return fragments;
-  };
-
-  return iterateOverObject(data);
-}
-
-const parsedData = parseData(fragmentsJson);
-console.log(fragmentsJson);
-
-console.log(parsedData);
 
 chrome.devtools.panels.create(PANEL_NAME, null, 'index.html');
 

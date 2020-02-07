@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import uniqueSelector from 'unique-selector';
 
 export const knotxNodes = () => {
   const rootElem = document.body;
@@ -63,14 +64,15 @@ export const knotxNodes = () => {
   COMMENTS.forEach((node) => {
     if (node.type === 'application/json') {
       currentFragment = {};
-      currentFragment.debug = JSON.parse(node.innerText);
+      currentFragment.debug = JSON.parse(node.textContent);
       fragments.push(currentFragment);
     } else {
       let { nodes } = currentFragment;
+
       if (nodes === undefined) {
         nodes = [];
       }
-      nodes.push(node);
+      nodes.push([uniqueSelector(node), node.tagName]);
       currentFragment.nodes = nodes;
     }
   });

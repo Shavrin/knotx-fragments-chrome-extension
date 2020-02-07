@@ -41,42 +41,30 @@ const NodeButton = styled.button`
 `;
 
 
-const NodeList = ({ expanded }) => {
-  function inspectNode(event) {
+const NodeList = ({ expanded, children }) => {
+  function inspectNode(event, selector) {
     event.preventDefault();
     event.stopPropagation();
-
-    const id = '9f1a2c76-148e-4d36-af8b-239ea8b785fb';
-    const selector = `[data-knotx-id="${id}"]:not(script)`;
     const query = `inspect(document.querySelector('${selector}'))`;
-
     chrome.devtools.inspectedWindow.eval(query);
   }
 
   return (
     <StyledNodeList expanded={expanded}>
-      <NodeButton onClick={inspectNode}>node 1</NodeButton>
-      <NodeButton onClick={inspectNode}>node 2</NodeButton>
-      <NodeButton onClick={inspectNode}>node 3</NodeButton>
-      <NodeButton onClick={inspectNode}>node 4</NodeButton>
-      <NodeButton onClick={inspectNode}>node 5</NodeButton>
-      <NodeButton onClick={inspectNode}>node 6</NodeButton>
-      <NodeButton onClick={inspectNode}>node 7</NodeButton>
-      <NodeButton onClick={inspectNode}>node 8</NodeButton>
-      <NodeButton onClick={inspectNode}>node 9</NodeButton>
-      <NodeButton onClick={inspectNode}>node 10</NodeButton>
-      <NodeButton onClick={inspectNode}>node 11</NodeButton>
-      <NodeButton onClick={inspectNode}>node 12</NodeButton>
-      <NodeButton onClick={inspectNode}>node 13</NodeButton>
+      {children.map((node) => (
+        <NodeButton onClick={(event) => { inspectNode(event, node[0]); }}>{node[1]}</NodeButton>
+      ))}
     </StyledNodeList>
   );
 };
 
 NodeList.defaultProps = {
   expanded: false,
+  children: [],
 };
 
 NodeList.propTypes = {
   expanded: propTypes.bool,
+  children: propTypes.arrayOf(propTypes.object),
 };
 export default NodeList;

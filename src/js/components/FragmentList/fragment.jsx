@@ -64,7 +64,9 @@ const Type = styled.div`
     flex: 1;
 `;
 
-const Fragment = ({ status, id, type }) => {
+const Fragment = ({
+  status, id, type, nodes,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const fragment = useRef(null);
 
@@ -92,7 +94,7 @@ const Fragment = ({ status, id, type }) => {
       </StatusWrapper>
       <Id>
         {id}
-        <NodeList expanded={expanded} />
+        <NodeList expanded={expanded}>{nodes}</NodeList>
       </Id>
       <Type>{type}</Type>
     </StyledFragment>
@@ -103,12 +105,14 @@ Fragment.defaultProps = {
   status: 'null',
   id: '-1',
   type: 'null',
+  nodes: [],
 };
 
 Fragment.propTypes = {
   status: PropTypes.string,
   id: PropTypes.string,
   type: PropTypes.string,
+  nodes: PropTypes.arrayOf(PropTypes.any),
 };
 
 export default Fragment;
