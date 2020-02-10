@@ -72,7 +72,10 @@ export const knotxNodes = () => {
       if (nodes === undefined) {
         nodes = [];
       }
-      nodes.push([uniqueSelector(node), node.tagName]);
+      nodes.push({
+        selector: uniqueSelector(node),
+        tag: node.tagName,
+      });
       currentFragment.nodes = nodes;
     }
   });

@@ -52,9 +52,9 @@ const NodeList = ({ expanded, children }) => {
     <StyledNodeList expanded={expanded}>
       {children.map((node) => (
         <NodeButton
-          onClick={(event) => { inspectNode(event, node[0]); }}
+          onClick={(event) => { inspectNode(event, node.selector); }}
         >
-          {node[1]}
+          {node.tag}
         </NodeButton>
       ))}
     </StyledNodeList>
