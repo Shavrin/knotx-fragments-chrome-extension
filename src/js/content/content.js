@@ -18,9 +18,7 @@ import { knotxNodes } from '../helpers/nodesHelper';
 import { status } from '../helpers/constants';
 
 window.onload = () => {
-  const nod = knotxNodes();
-  nod[0].nodes.push('shit');
-  chrome.runtime.sendMessage({ fragmentsData: nod }, (response) => {
+  chrome.runtime.sendMessage({ fragmentsData: knotxNodes() }, (response) => {
     /* eslint-disable no-console */
     if (response.status === status.error) {
       console.warn(response.msg);

@@ -83,7 +83,6 @@ const FragmentList = () => {
   }
 
   const data = useSelector(({ pageData }) => pageData);
-
   const parsedData = mapDataToComponents(data);
   const sortedFragmentsByTime = sortByProcessingTime(parsedData);
   const [fragments, setFragments] = useState(sortedFragmentsByTime);

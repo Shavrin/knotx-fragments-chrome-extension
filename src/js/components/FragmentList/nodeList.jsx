@@ -45,14 +45,17 @@ const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
     event.preventDefault();
     event.stopPropagation();
-    const query = `inspect(document.querySelector('${selector}'))`;
-    chrome.devtools.inspectedWindow.eval(query);
+    chrome.devtools.inspectedWindow.eval(`inspect(document.querySelector('${selector}'))`);
   }
 
   return (
     <StyledNodeList expanded={expanded}>
       {children.map((node) => (
-        <NodeButton onClick={(event) => { inspectNode(event, node[0]); }}>{node[1]}</NodeButton>
+        <NodeButton
+          onClick={(event) => { inspectNode(event, node[0]); }}
+        >
+          {node[1]}
+        </NodeButton>
       ))}
     </StyledNodeList>
   );

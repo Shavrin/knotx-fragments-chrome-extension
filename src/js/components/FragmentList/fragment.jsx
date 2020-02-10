@@ -66,8 +66,7 @@ const Fragment = ({
   status, id, type, nodes,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const fragment = useRef(null);
-
+  console.log(nodes);
   function handleClick(event) {
     event.preventDefault();
     setExpanded(!expanded);
@@ -81,7 +80,6 @@ const Fragment = ({
 
   return (
     <StyledFragment
-      ref={fragment}
       tabIndex="0"
       onClick={handleClick}
       onKeyDown={handleEnter}
