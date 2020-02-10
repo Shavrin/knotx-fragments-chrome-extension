@@ -1,0 +1,335 @@
+{
+  "fragments": [
+    {
+      "debug": {
+        "fragment": {
+          "id": "9f1a2c76-11148e-4d36-af8b-239ea8b785fb",
+          "type": "snippet",
+          "configuration": { "data-knotx-task": "books-and-authors-listing" },
+          "body": "\n      <div class=\"col-md-4\">\n        <h2>Book</h2>\n        <p>Knot.x Integration Tests in Practice</p>\n        <p>Authors: Knot.x Team</p>\n        <div>Success! Status code : 500</div>\n      </div>\n      <div class=\"col-md-4\">\n        <h2>Author</h2>\n        <p>Knot X</p>\n        <p>Bio: Aliquam cursus fermentum mi, vel tempus mi pellentesque vel. Nunc in feugiat lorem. Etiam placerat ante eget sem euismod, sit amet dictum sapien vulputate. Morbi pellentesque arcu a mauris ornare eleifend.</p>\n        <div>Success! Status code : 200</div>\n      </div>\n    ",
+          "payload": {
+            "author": {
+              "_request": {
+                "type": "HTTP",
+                "source": "/service/mock/author.json",
+                "metadata": { "headers": {} }
+              },
+              "_response": {
+                "success": true,
+                "metadata": {
+                  "statusCode": "200",
+                  "headers": {
+                    "Content-Type": ["application/json; charset=UTF-8"],
+                    "Transfer-Encoding": ["chunked"],
+                    "Server": ["Jetty(9.2.24.v20180105)"]
+                  }
+                }
+              },
+              "_result": {
+                "name": "Knot X",
+                "info": {
+                  "dateOfBirth": 2016,
+                  "portfolio": ["tutorials", "blogs", "books"],
+                  "bio": "Aliquam cursus fermentum mi, vel tempus mi pellentesque vel. Nunc in feugiat lorem. Etiam placerat ante eget sem euismod, sit amet dictum sapien vulputate. Morbi pellentesque arcu a mauris ornare eleifend."
+                }
+              }
+            },
+            "book": {
+              "_response": { "metadata": { "statusCode": 500 } },
+              "_result": {
+                "info": { "authors": "Knot.x Team" },
+                "title": "Knot.x Integration Tests in Practice"
+              }
+            }
+          }
+        },
+        "log": {
+          "operations": [
+            {
+              "task": "books-and-authors-listing",
+              "node": "author",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163899389,
+              "nodeLog": null
+            },
+            {
+              "task": "books-and-authors-listing",
+              "node": "book-with-circuit-breaker",
+              "status": "SUCCESS",
+              "transition": "_fallback",
+              "timestamp": 1579163900374,
+              "nodeLog": {
+                "alias": "book-with-circuit-breaker",
+                "logs": {
+                  "invocationCount": "1",
+                  "error": "Exception: class io.vertx.circuitbreaker.TimeoutException. operation timeout"
+                },
+                "doActionLogs": []
+              }
+            },
+            {
+              "task": "books-and-authors-listing",
+              "node": "book-inline-payload-fallback",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900376,
+              "nodeLog": null
+            },
+            {
+              "task": "books-and-authors-listing",
+              "node": "composite",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900376,
+              "nodeLog": null
+            },
+            {
+              "task": "books-and-authors-listing",
+              "node": "te-hbs",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900391,
+              "nodeLog": null
+            }
+          ]
+        },
+        "status": "ERROR"
+      },
+      "nodes": [
+        {
+          "selector": ".container-fluid > :nth-child(2) > :nth-child(2)",
+          "tag": "DIV"
+        },
+        {
+          "selector": ".container-fluid > :nth-child(2) > :nth-child(3)",
+          "tag": "DIV"
+        }
+      ]
+    },
+    {
+      "debug": {
+        "fragment": {
+          "id": "fd788851-6393-441e-8b77c-30cac48cf100",
+          "type": "snippet",
+          "configuration": { "data-knotx-task": "authors-listing" },
+          "body": "\n        <h2>Portfolio: </h2>\n        <ul>\n          \n          <li>tutorials</li>\n          \n          <li>blogs</li>\n          \n          <li>books</li>\n          \n        </ul>\n      ",
+          "payload": {
+            "author": {
+              "_request": {
+                "type": "HTTP",
+                "source": "/service/mock/author.json",
+                "metadata": { "headers": {} }
+              },
+              "_response": {
+                "success": true,
+                "metadata": {
+                  "statusCode": "200",
+                  "headers": {
+                    "Content-Type": ["application/json; charset=UTF-8"],
+                    "Transfer-Encoding": ["chunked"],
+                    "Server": ["Jetty(9.2.24.v20180105)"]
+                  }
+                }
+              },
+              "_result": {
+                "name": "Knot X",
+                "info": {
+                  "dateOfBirth": 2016,
+                  "portfolio": ["tutorials", "blogs", "books"],
+                  "bio": "Aliquam cursus fermentum mi, vel tempus mi pellentesque vel. Nunc in feugiat lorem. Etiam placerat ante eget sem euismod, sit amet dictum sapien vulputate. Morbi pellentesque arcu a mauris ornare eleifend."
+                }
+              }
+            }
+          }
+        },
+        "log": {
+          "operations": [
+            {
+              "task": "authors-listing",
+              "node": "author",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163899391,
+              "nodeLog": null
+            },
+            {
+              "task": "authors-listing",
+              "node": "te-hbs",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163899516,
+              "nodeLog": null
+            }
+          ]
+        },
+        "status": "SUCCESS"
+      },
+      "nodes": [
+        { "selector": ":nth-child(3) > :nth-child(1) > h2", "tag": "H2" },
+        { "selector": "ul", "tag": "UL" }
+      ]
+    },
+    {
+      "debug": {
+        "fragment": {
+          "id": "542808ae-8f21-443df-b980-4f282f7731d4",
+          "type": "snippet",
+          "configuration": { "data-knotx-task": "books-listing" },
+          "body": "<p>Tags are unavailable at the moment</p>",
+          "payload": {}
+        },
+        "log": {
+          "operations": [
+            {
+              "task": "books-listing",
+              "node": "book-with-circuit-breaker",
+              "status": "SUCCESS",
+              "transition": "_fallback",
+              "timestamp": 1579163900382,
+              "nodeLog": {
+                "alias": "book-with-circuit-breaker",
+                "logs": {
+                  "invocationCount": "1",
+                  "error": "Exception: class io.vertx.circuitbreaker.TimeoutException. operation timeout"
+                },
+                "doActionLogs": []
+              }
+            },
+            {
+              "task": "books-listing",
+              "node": "book-inline-body-fallback",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900383,
+              "nodeLog": null
+            }
+          ]
+        },
+        "status": "MISSING"
+      },
+      "nodes": [{ "selector": ":nth-child(3) > :nth-child(2) > p", "tag": "P" }]
+    },
+    {
+      "debug": {
+        "fragment": {
+          "id": "542808ae-8f21-44df-b980-4f282f7731d4",
+          "type": "snippet",
+          "configuration": { "data-knotx-task": "books-listing" },
+          "body": "<p>Tags are unavailable at the moment</p>",
+          "payload": {}
+        },
+        "log": {
+          "operations": [
+            {
+              "task": "books-listing",
+              "node": "book-with-circuit-breaker",
+              "status": "SUCCESS",
+              "transition": "_fallback",
+              "timestamp": 1579163900382,
+              "nodeLog": {
+                "alias": "book-with-circuit-breaker",
+                "logs": {
+                  "invocationCount": "1",
+                  "error": "Exception: class io.vertx.circuitbreaker.TimeoutException. operation timeout"
+                },
+                "doActionLogs": []
+              }
+            },
+            {
+              "task": "books-listing",
+              "node": "book-inline-body-fallback",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900383,
+              "nodeLog": null
+            }
+          ]
+        },
+        "status": "OTHER"
+      },
+      "nodes": [{ "selector": ":nth-child(3) > :nth-child(2) > p", "tag": "P" }]
+    },
+    {
+      "debug": {
+        "fragment": {
+          "id": "542808ae-81f21-44df-b980-4f282f7731d4",
+          "type": "snippet",
+          "configuration": { "data-knotx-task": "books-listing" },
+          "body": "<p>Tags are unavailable at the moment</p>",
+          "payload": {}
+        },
+        "log": {
+          "operations": [
+            {
+              "task": "books-listing",
+              "node": "book-with-circuit-breaker",
+              "status": "SUCCESS",
+              "transition": "_fallback",
+              "timestamp": 1579163900382,
+              "nodeLog": {
+                "alias": "book-with-circuit-breaker",
+                "logs": {
+                  "invocationCount": "1",
+                  "error": "Exception: class io.vertx.circuitbreaker.TimeoutException. operation timeout"
+                },
+                "doActionLogs": []
+              }
+            },
+            {
+              "task": "books-listing",
+              "node": "book-inline-body-fallback",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900383,
+              "nodeLog": null
+            }
+          ]
+        },
+        "status": "WARNING"
+      },
+      "nodes": [{ "selector": ":nth-child(3) > :nth-child(2) > p", "tag": "P" }]
+    },
+    {
+      "debug": {
+        "fragment": {
+          "id": "542808ae-8f21-44df-b980-42f282f7731d4",
+          "type": "snippet",
+          "configuration": { "data-knotx-task": "books-listing" },
+          "body": "<p>Tags are unavailable at the moment</p>",
+          "payload": {}
+        },
+        "log": {
+          "operations": [
+            {
+              "task": "books-listing",
+              "node": "book-with-circuit-breaker",
+              "status": "SUCCESS",
+              "transition": "_fallback",
+              "timestamp": 1579163900382,
+              "nodeLog": {
+                "alias": "book-with-circuit-breaker",
+                "logs": {
+                  "invocationCount": "1",
+                  "error": "Exception: class io.vertx.circuitbreaker.TimeoutException. operation timeout"
+                },
+                "doActionLogs": []
+              }
+            },
+            {
+              "task": "books-listing",
+              "node": "book-inline-body-fallback",
+              "status": "SUCCESS",
+              "transition": "_success",
+              "timestamp": 1579163900383,
+              "nodeLog": null
+            }
+          ]
+        },
+        "status": "UNPROCESSED"
+      },
+      "nodes": [{ "selector": ":nth-child(3) > :nth-child(2) > p", "tag": "P" }]
+    }
+  ],
+  "url": "http://localhost:5500/samples/books.html"
+}
