@@ -27,14 +27,6 @@ const StyledFragmentList = styled.div`
 
 const SortingWrapper = styled.div`
     display: flex;
-    &-status {
-    }
-    &-id {
-      flex: 1;
-    }
-    &-type {
-      flex: 1;
-    }
 `;
 
 const SortingButton = styled.button`
