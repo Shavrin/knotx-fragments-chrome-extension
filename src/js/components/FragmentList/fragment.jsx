@@ -66,6 +66,7 @@ const Fragment = ({
   status, id, type, nodes,
 }) => {
   const [expanded, setExpanded] = useState(false);
+
   function handleClick(event) {
     event.preventDefault();
     setExpanded(!expanded);

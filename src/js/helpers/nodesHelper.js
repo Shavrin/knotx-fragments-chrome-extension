@@ -64,11 +64,10 @@ export const knotxNodes = () => {
   COMMENTS.forEach((node) => {
     if (node.type === 'application/json') {
       currentFragment = {};
-      currentFragment.debug = JSON.parse(node.textContent);
+      currentFragment.debug = JSON.parse(node.innerText);
       fragments.push(currentFragment);
     } else {
       let { nodes } = currentFragment;
-
       if (nodes === undefined) {
         nodes = [];
       }

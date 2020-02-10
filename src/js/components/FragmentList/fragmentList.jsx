@@ -15,8 +15,8 @@
  */
 
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import Fragment from './fragment';
 
 const StyledFragmentList = styled.div`
@@ -90,6 +90,7 @@ const FragmentList = () => {
   function sortByStatus() {
     function getStatusSortWeight(status) {
       let sortWeight = 0;
+
       switch (status) {
         case 'error':
           sortWeight = 0;
