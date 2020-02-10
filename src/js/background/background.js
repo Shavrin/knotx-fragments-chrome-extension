@@ -33,7 +33,9 @@ chrome.runtime.onMessage.addListener(
       fragments: request.fragmentsData,
       url: sender.tab.url,
     };
+
     store.dispatch(getPageData(pageDataObj));
+
     const { pageData } = store.getState();
     if (pageData.fragments.length > 0 && pageData.url) {
       sendResponse({
