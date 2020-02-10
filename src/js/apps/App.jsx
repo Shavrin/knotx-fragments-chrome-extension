@@ -39,8 +39,8 @@ const darkTheme = {
 };
 
 const App = () => {
-  const { themeName } = chrome.devtools.panels;
-  const theme = themeName === 'default' ? defaultTheme : darkTheme;
+  const { themeName: chromeTheme } = chrome.devtools.panels;
+  const theme = chromeTheme === 'default' ? defaultTheme : darkTheme;
 
   return (
     <ThemeProvider theme={theme}>

@@ -77,7 +77,6 @@ const FragmentList = () => {
     });
   }
 
-
   function sortByProcessingTime(fragments) {
     const sortedFragments = fragments.concat().sort(
       (a, b) => {

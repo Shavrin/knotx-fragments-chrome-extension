@@ -24,14 +24,13 @@ const StyledFragment = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.borderColor};
     color: ${({ theme }) => theme.textColor};
     background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
+
     &:nth-child(2n + 1) {
       background-color: ${({ theme }) => theme.oddFragmentBgColor};;
       background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
     }
-    &:hover {
-      background-color: ${({ theme }) => theme.fragmentHighlight};
-    }
-    &:focus {
+
+    &:hover, &:focus{
       background-color: ${({ theme }) => theme.fragmentHighlight};
     }
 `;
@@ -50,14 +49,13 @@ const Status = styled.div`
     background-color: ${({ status }) => (status === 'success' ? '#01a101' : '')};
     background-color: ${({ status }) => (status === 'error' ? '#ff0000' : '')};
     background-color: ${({ status }) => (status === 'unprocessed' ? '#a7a7a7' : '')};
-    background-color: ${({ status }) => (status === 'other' ? '#ffbb00' : '')};
-    background-color: ${({ status }) => (status === 'missing' ? '#ffbb00' : '')};
+    background-color: ${({ status }) => ((status === 'other' || status === 'missing') ? '#ffbb00' : '')};
 `;
 
 const Id = styled.div`
     overflow: hidden;
     flex: 1;
-    border-right: 1px solid ${({ theme }) => theme.borderColor};;
+    border-right: 1px solid ${({ theme }) => theme.borderColor};
 `;
 
 const Type = styled.div`
