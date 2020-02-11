@@ -16,32 +16,7 @@
 
 import React from 'react';
 import propTypes from 'prop-types';
-import styled from 'styled-components';
-
-const StyledNodeList = styled.div`
-    display: ${({ expanded }) => (expanded ? 'block' : 'none')};
-`;
-
-const NodeButton = styled.button`
-    background-color: transparent;
-    border: 0;
-    width: 100%;
-    color: ${({ theme }) => theme.textColor};
-    text-align: start;
-    border-bottom: 1px solid ${({ theme }) => theme.borderColor};
-
-    &:hover {
-      background-color: ${({ theme }) => theme.nodeHighlight};
-    }
-
-    &:nth-child(2n + 1) {
-      background-color: ${({ theme }) => theme.oddNodeBgColor};
-
-      &:hover {
-        background-color: ${({ theme }) => theme.nodeHighlight};
-      }
-    }
-`;
+import Styled from './nodeList.style';
 
 const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
@@ -69,18 +44,18 @@ const NodeList = ({ expanded, children }) => {
   }
 
   return (
-    <StyledNodeList expanded={expanded}>
+    <Styled.NodeList expanded={expanded}>
       {children.map((node) => (
-        <NodeButton
+        <Styled.NodeButton
           key={node.selector}
           onClick={(event) => { inspectNode(event, node.selector); }}
           onMouseEnter={(event) => { highlightNode(event, node.selector); }}
           onMouseLeave={(event) => { hideHighlightNode(event, node.selector); }}
         >
           {node.tag}
-        </NodeButton>
+        </Styled.NodeButton>
       ))}
-    </StyledNodeList>
+    </Styled.NodeList>
   );
 };
 
