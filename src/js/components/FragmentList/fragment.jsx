@@ -55,16 +55,13 @@ const Fragment = ({
 };
 
 Fragment.defaultProps = {
-  status: 'null',
-  id: '-1',
-  type: 'null',
   nodes: [],
 };
 
 Fragment.propTypes = {
-  status: PropTypes.string,
-  id: PropTypes.string,
-  type: PropTypes.string,
+  status: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   nodes: PropTypes.arrayOf(PropTypes.any),
 };
 
