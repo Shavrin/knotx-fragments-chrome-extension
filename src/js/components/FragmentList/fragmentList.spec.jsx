@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import React from 'react';
-import renderer from 'react-test-renderer';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -36,76 +36,107 @@ describe('<FragmentList /> unit test', () => {
     </Provider>,
   );
 
-  it('should render exactly 6 fragments', () => {
+  it('should render exactly 5 fragments', () => {
     const wrapper = getWrapper();
-    expect(wrapper.find(Fragment)).toHaveLength(6);
-  });
-
-  it('should render 1 fragment with status warning', () => {
-    const wrapper = getWrapper();
-    expect(wrapper.findWhere((n) => n.name() === 'Fragment' && n.prop('status') === 'warning')).toHaveLength(1);
+    expect(wrapper.find(Fragment))
+      .toHaveLength(5);
   });
 
   it('should render 1 fragment with status success', () => {
     const wrapper = getWrapper();
-    expect(wrapper.findWhere((n) => n.name() === 'Fragment' && n.prop('status') === 'success')).toHaveLength(1);
+    expect(wrapper
+      .findWhere(
+        (n) => n.name() === 'Fragment' && n.prop('status') === 'success',
+      ))
+      .toHaveLength(1);
   });
 
   it('should render 1 fragment with status error', () => {
     const wrapper = getWrapper();
-    expect(wrapper.findWhere((n) => n.name() === 'Fragment' && n.prop('status') === 'error')).toHaveLength(1);
+    expect(wrapper
+      .findWhere(
+        (n) => n.name() === 'Fragment' && n.prop('status') === 'error',
+      ))
+      .toHaveLength(1);
   });
 
   it('should render 1 fragment with status missing', () => {
     const wrapper = getWrapper();
-    expect(wrapper.findWhere((n) => n.name() === 'Fragment' && n.prop('status') === 'missing')).toHaveLength(1);
+    expect(wrapper
+      .findWhere(
+        (n) => n.name() === 'Fragment' && n.prop('status') === 'missing',
+      ))
+      .toHaveLength(1);
   });
 
   it('should render 1 fragment with status unprocessed', () => {
     const wrapper = getWrapper();
-    expect(wrapper.findWhere((n) => n.name() === 'Fragment' && n.prop('status') === 'unprocessed')).toHaveLength(1);
+    expect(wrapper
+      .findWhere(
+        (n) => n.name() === 'Fragment' && n.prop('status') === 'unprocessed',
+      ))
+      .toHaveLength(1);
   });
 
   it('should render 1 fragment with status other', () => {
     const wrapper = getWrapper();
-    expect(wrapper.findWhere((n) => n.name() === 'Fragment' && n.prop('status') === 'other')).toHaveLength(1);
+    expect(wrapper
+      .findWhere(
+        (n) => n.name() === 'Fragment' && n.prop('status') === 'other',
+      ))
+      .toHaveLength(1);
   });
 
   it('should render node list under each fragment', () => {
     const wrapper = getWrapper();
-    expect(wrapper.find(Fragment).find(NodeList).exists()).toEqual(true);
+    expect(wrapper
+      .find(Fragment)
+      .contains(NodeList)).toEqual(true);
   });
 
-  it('nodelist should not display be expanded by default', () => {
+  it('nodelist should not be expanded by default', () => {
     const wrapper = getWrapper();
-    expect(wrapper.find(Fragment).first().find(NodeList).prop('expanded')).toEqual(false);
+    expect(wrapper
+      .find(Fragment)
+      .first()
+      .find(NodeList)
+      .prop('expanded')).toEqual(false);
   });
 
   it('nodelist should be displayed after first click', () => {
     const wrapper = getWrapper();
-    wrapper.find(Fragment).first().simulate('click');
-    expect(wrapper.find(Fragment).first().find(NodeList).prop('expanded')).toEqual(true);
+    wrapper
+      .find(Fragment)
+      .first()
+      .simulate('click');
+
+    expect(wrapper
+      .find(Fragment)
+      .first()
+      .find(NodeList)
+      .prop('expanded')).toEqual(true);
   });
 
   it('nodelist should not be displayed after second click', () => {
     const wrapper = getWrapper();
-    wrapper.find(Fragment).first().simulate('click').simulate('click');
-    expect(wrapper.find(Fragment).first().find(NodeList).prop('expanded')).toEqual(false);
+    wrapper
+      .find(Fragment)
+      .first()
+      .simulate('click')
+      .simulate('click');
+
+    expect(wrapper
+      .find(Fragment)
+      .first()
+      .find(NodeList)
+      .prop('expanded')).toEqual(false);
   });
 
   it('first fragment should render exactly 2 nodes in nodelist', () => {
     const wrapper = getWrapper();
-    expect(wrapper.find(Fragment).first().find('button')).toHaveLength(2);
-  });
-
-  it('Click on status sort button sorts by status', () => {
-  });
-
-  it('Click on id sort button sorts by id', () => {
-
-  });
-
-  it('Click on type sort button sorts by type', () => {
-
+    expect(wrapper
+      .find(Fragment)
+      .first()
+      .find('button')).toHaveLength(2);
   });
 });
