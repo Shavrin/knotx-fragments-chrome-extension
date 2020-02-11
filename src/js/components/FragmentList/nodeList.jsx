@@ -50,12 +50,32 @@ const NodeList = ({ expanded, children }) => {
     chrome.devtools.inspectedWindow.eval(`inspect(document.querySelector('${selector}'))`);
   }
 
+  function highlightNode(event, selector) {
+    event.preventDefault();
+    event.stopPropagation();
+    chrome
+      .devtools
+      .inspectedWindow
+      .eval(`document.querySelector('${selector}').classList.add("knotx-devtool-highlight")`);
+  }
+
+  function hideHighlightNode(event, selector) {
+    event.preventDefault();
+    event.stopPropagation();
+    chrome
+      .devtools
+      .inspectedWindow
+      .eval(`document.querySelector('${selector}').classList.remove("knotx-devtool-highlight")`);
+  }
+
   return (
     <StyledNodeList expanded={expanded}>
       {children.map((node) => (
         <NodeButton
           key={node.selector}
           onClick={(event) => { inspectNode(event, node.selector); }}
+          onMouseEnter={(event) => { highlightNode(event, node.selector); }}
+          onMouseLeave={(event) => { hideHighlightNode(event, node.selector); }}
         >
           {node.tag}
         </NodeButton>
