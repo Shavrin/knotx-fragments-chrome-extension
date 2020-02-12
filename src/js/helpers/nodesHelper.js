@@ -74,7 +74,12 @@ const createFragment = (id, nodes) => {
     .filter((node) => node.nodeType === Node.ELEMENT_NODE)
     .forEach((node) => node.setAttribute('data-knotx-id', id));
 
-  return { nodes: fragmentNodes, debug };
+  const parsedFragmentNodes = fragmentNodes.map((node) => ({
+    tag: node.tagName,
+    selector: uniqueSelector(node),
+  }));
+
+  return { nodes: parsedFragmentNodes, debug };
 };
 
 const parseFragments = (root) => findBoundaries(root)
