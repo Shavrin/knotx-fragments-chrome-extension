@@ -14,11 +14,24 @@
  * limitations under the License.
  */
 
+import uniqueSelector from 'unique-selector';
 import { findFragmentsInContent } from '../helpers/nodesHelper';
 import { status } from '../helpers/constants';
 
 window.onload = () => {
-  chrome.runtime.sendMessage({ fragmentsData: findFragmentsInContent() }, (response) => {
+  const adaptedData = findFragmentsInContent().map(({ nodes, debug }) => {
+    const parsedNodes = nodes.map(
+      (node) => (
+        {
+          tag: node.tagName,
+          selector: uniqueSelector(node),
+        }
+      ),
+    );
+    return { parsedNodes, debug };
+  });
+
+  chrome.runtime.sendMessage({ fragmentsData: adaptedData }, (response) => {
     /* eslint-disable no-console */
     if (response.status === status.error) {
       console.warn(response.msg);

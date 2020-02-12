@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import uniqueSelector from 'unique-selector';
 
 export const isFragmentBoundary = (node) => node.nodeType === Node.COMMENT_NODE
   && /data-knotx-id="(.*)"/.test(node.data);
@@ -74,12 +73,7 @@ const createFragment = (id, nodes) => {
     .filter((node) => node.nodeType === Node.ELEMENT_NODE)
     .forEach((node) => node.setAttribute('data-knotx-id', id));
 
-  const parsedFragmentNodes = fragmentNodes.map((node) => ({
-    tag: node.tagName,
-    selector: uniqueSelector(node),
-  }));
-
-  return { nodes: parsedFragmentNodes, debug };
+  return { nodes: fragmentNodes, debug };
 };
 
 const parseFragments = (root) => findBoundaries(root)
