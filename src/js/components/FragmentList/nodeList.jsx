@@ -16,7 +16,7 @@
 
 import React from 'react';
 import propTypes from 'prop-types';
-import Styled from './nodeList.style';
+import { NodeButton, NodeListWrapper } from './nodeList.style';
 
 const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
@@ -43,18 +43,18 @@ const NodeList = ({ expanded, children }) => {
   }
 
   return (
-    <Styled.NodeList expanded={expanded}>
+    <NodeListWrapper expanded={expanded}>
       {children.map((node) => (
-        <Styled.NodeButton
+        <NodeButton
           key={node.selector}
           onClick={(event) => { inspectNode(event, node.selector); }}
           onMouseEnter={(event) => { highlightNode(event, node.selector); }}
           onMouseLeave={(event) => { hideHighlightNode(event, node.selector); }}
         >
           {node.tag}
-        </Styled.NodeButton>
+        </NodeButton>
       ))}
-    </Styled.NodeList>
+    </NodeListWrapper>
   );
 };
 
@@ -67,4 +67,5 @@ NodeList.propTypes = {
   expanded: propTypes.bool,
   children: propTypes.arrayOf(propTypes.object),
 };
+
 export default NodeList;

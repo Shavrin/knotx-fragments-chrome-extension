@@ -16,11 +16,11 @@
 
 import styled from 'styled-components';
 
-const NodeList = styled.div`
+export const NodeListWrapper = styled.div`
     display: ${({ expanded }) => (expanded ? 'block' : 'none')};
 `;
 
-const NodeButton = styled.button`
+export const NodeButton = styled.button`
     background-color: transparent;
     border: 0;
     width: 100%;
@@ -40,10 +40,3 @@ const NodeButton = styled.button`
       }
     }
 `;
-
-const Styled = {
-  NodeList,
-  NodeButton,
-};
-
-export default Styled;

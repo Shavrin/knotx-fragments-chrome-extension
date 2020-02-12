@@ -16,7 +16,9 @@
 
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Styled from './fragmentList.style';
+import {
+  FragmentListWrapper, SortingButton, SortingWrapper,
+} from './fragmentList.style';
 import Fragment from './fragment';
 
 const FragmentList = () => {
@@ -64,14 +66,14 @@ const FragmentList = () => {
   }
 
   return (
-    <Styled.FragmentList>
-      <Styled.SortingWrapper>
-        <Styled.SortingButtonStatus onClick={sortByStatus}>&darr;</Styled.SortingButtonStatus>
-        <Styled.SortingButtonId onClick={sortById}>ID&darr;</Styled.SortingButtonId>
-        <Styled.SortingButtonType onClick={sortByType}>TYPE&darr;</Styled.SortingButtonType>
-      </Styled.SortingWrapper>
+    <FragmentListWrapper>
+      <SortingWrapper>
+        <SortingButton status onClick={sortByStatus}>&darr;</SortingButton>
+        <SortingButton onClick={sortById}>ID&darr;</SortingButton>
+        <SortingButton onClick={sortByType}>TYPE&darr;</SortingButton>
+      </SortingWrapper>
       {fragments}
-    </Styled.FragmentList>
+    </FragmentListWrapper>
   );
 };
 
