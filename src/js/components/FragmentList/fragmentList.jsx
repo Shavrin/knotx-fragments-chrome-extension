@@ -21,56 +21,73 @@ import {
 } from './fragmentList.style';
 import FragmentListItem from './FragmentListItem/fragmentListItem';
 
-const FragmentList = () => {
-  function mapDataToComponents({ fragments }) {
-    return fragments.map(({ debug, nodes }) => {
-      const { fragment } = debug;
-      return (
-        <FragmentListItem
-          key={fragment.id}
-          id={fragment.id}
-          status={debug.status.toLowerCase()}
-          type={fragment.type}
-          nodes={nodes}
-        />
-      );
-    });
-  }
+export function mapDataToComponents({ fragments }) {
+  return fragments.map(({ debug, nodes }) => {
+    const { fragment } = debug;
+    return (
+      <FragmentListItem
+        key={fragment.id}
+        id={fragment.id}
+        status={debug.status.toLowerCase()}
+        type={fragment.type}
+        nodes={nodes}
+      />
+    );
+  });
+}
 
+export function sortFragmentsByStatus(fragments) {
+  const sortOrder = ['success', 'other', 'missing', 'unprocessed', 'error'];
+  const ordering = sortOrder.reduce((result, current, index) => (
+    {
+      ...result,
+      [current]: index,
+    }
+  ), {});
+
+  const sortedFragments = fragments.concat().sort((a, b) => (
+    ordering[a.props.status] - ordering[b.props.status] || a.props.status.localeCompare(b.props.status)
+  ));
+  return sortedFragments;
+}
+
+const FragmentList = () => {
   const data = useSelector(({ pageData }) => pageData);
   const parsedData = mapDataToComponents(data);
   const [fragments, setFragments] = useState(parsedData);
 
-  function sortByStatus() {
-    const sortOrder = ['success', 'other', 'missing', 'unprocessed', 'error'];
-    const ordering = {};
-    sortOrder.forEach((element, index) => { ordering[element] = index; });
-    const sortedFragments = fragments.concat().sort((a, b) => (
-      ordering[a.props.status] - ordering[b.props.status] || a.props.status.localeCompare(b.props.status)
-    ));
-    setFragments(sortedFragments);
-  }
+  const typeSortComparator = (
+    { props: { type: typeA } },
+    { props: { type: typeB } },
+  ) => typeA.localeCompare(typeB);
 
-  function sortById() {
-    const sortedFragments = fragments.concat().sort(
-      ({ props: { id: idA } }, { props: { id: idB } }) => idA.localeCompare(idB),
-    );
-    setFragments(sortedFragments);
-  }
-
-  function sortByType() {
-    const sortedFragments = fragments.concat().sort(
-      ({ props: { type: typeA } }, { props: { type: typeB } }) => typeA.localeCompare(typeB),
-    );
-    setFragments(sortedFragments);
-  }
+  const idSortComparator = (
+    { props: { id: idA } },
+    { props: { id: idB } },
+  ) => idA.localeCompare(idB);
 
   return (
     <FragmentListWrapper>
       <SortingWrapper>
-        <SortingButton status onClick={sortByStatus}>&darr;</SortingButton>
-        <SortingButton onClick={sortById}>ID&darr;</SortingButton>
-        <SortingButton onClick={sortByType}>TYPE&darr;</SortingButton>
+        <SortingButton
+          status
+          onClick={() => setFragments(sortFragmentsByStatus(fragments))}
+        >
+          &darr;
+        </SortingButton>
+
+        <SortingButton
+          onClick={() => setFragments(fragments.concat().sort(idSortComparator))}
+        >
+          ID&darr;
+        </SortingButton>
+
+        <SortingButton
+          onClick={() => setFragments(fragments.concat().sort(typeSortComparator))}
+        >
+          TYPE&darr;
+        </SortingButton>
+
       </SortingWrapper>
       {fragments}
     </FragmentListWrapper>
