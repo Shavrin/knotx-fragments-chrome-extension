@@ -50,12 +50,16 @@ const FragmentList = () => {
   }
 
   function sortById() {
-    const sortedFragments = fragments.concat().sort((a, b) => a.props.id.localeCompare(b.props.id));
+    const sortedFragments = fragments.concat().sort(
+      ({ props: { id: idA } }, { props: { id: idB } }) => idA.localeCompare(idB),
+    );
     setFragments(sortedFragments);
   }
 
   function sortByType() {
-    const sortedFragments = fragments.concat().sort((a, b) => a.props.type.localeCompare(b.props.type));
+    const sortedFragments = fragments.concat().sort(
+      ({ props: { type: typeA } }, { props: { type: typeB } }) => typeA.localeCompare(typeB),
+    );
     setFragments(sortedFragments);
   }
 
