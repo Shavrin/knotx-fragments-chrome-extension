@@ -62,7 +62,7 @@ Fragment.propTypes = {
   status: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  nodes: PropTypes.arrayOf(PropTypes.any),
+  nodes: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Fragment;
