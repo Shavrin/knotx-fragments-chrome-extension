@@ -24,8 +24,7 @@ const Fragment = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
 
-  function handleClick(event) {
-    event.preventDefault();
+  function handleClick() {
     setExpanded(!expanded);
   }
 
