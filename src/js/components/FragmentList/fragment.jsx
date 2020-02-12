@@ -18,6 +18,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Styled from './fragment.style';
 import NodeList from './nodeList';
+import ENTER_KEY_CODE from '../../helpers/constants';
 
 const Fragment = ({
   status, id, type, nodes,
@@ -29,7 +30,7 @@ const Fragment = ({
   }
 
   function handleEnter(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === ENTER_KEY_CODE) {
       setExpanded(!expanded);
     }
   }

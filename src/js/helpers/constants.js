@@ -21,6 +21,7 @@ export const status = {
   succes: 'succes',
   error: 'error',
 };
+export const ENTER_KEY_CODE = 13;
 
 // MESSAGES
 /* eslint-disable max-len */
