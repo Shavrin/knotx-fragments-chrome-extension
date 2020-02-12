@@ -35,23 +35,9 @@ const FragmentList = () => {
     });
   }
 
-  function sortByProcessingTime(fragments) {
-    const sortedFragments = fragments.concat().sort(
-      (a, b) => {
-        const sortWeightA = parseInt(a.props.time, 10);
-        const sortWeightB = parseInt(b.props.time, 10);
-        if (sortWeightA < sortWeightB) return -1;
-        if (sortWeightA > sortWeightB) return 1;
-        return 0;
-      },
-    );
-    return sortedFragments;
-  }
-
   const data = useSelector(({ pageData }) => pageData);
   const parsedData = mapDataToComponents(data);
-  const sortedFragmentsByTime = sortByProcessingTime(parsedData);
-  const [fragments, setFragments] = useState(sortedFragmentsByTime);
+  const [fragments, setFragments] = useState(parsedData);
 
   function sortByStatus() {
     const sortOrder = ['success', 'other', 'missing', 'unprocessed', 'error'];
