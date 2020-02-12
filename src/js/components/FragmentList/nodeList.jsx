@@ -20,7 +20,6 @@ import Styled from './nodeList.style';
 
 const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
-    event.preventDefault();
     event.stopPropagation();
     chrome.devtools.inspectedWindow.eval(`inspect(document.querySelector('${selector}'))`);
   }
