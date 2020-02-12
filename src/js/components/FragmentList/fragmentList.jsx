@@ -19,14 +19,14 @@ import { useSelector } from 'react-redux';
 import {
   FragmentListWrapper, SortingButton, SortingWrapper,
 } from './fragmentList.style';
-import Fragment from './fragment';
+import FragmentListItem from './FragmentListItem/fragmentListItem';
 
 const FragmentList = () => {
   function mapDataToComponents({ fragments }) {
     return fragments.map(({ debug, nodes }) => {
       const { fragment } = debug;
       return (
-        <Fragment
+        <FragmentListItem
           key={fragment.id}
           id={fragment.id}
           status={debug.status.toLowerCase()}

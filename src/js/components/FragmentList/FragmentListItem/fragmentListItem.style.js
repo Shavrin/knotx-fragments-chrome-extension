@@ -16,7 +16,7 @@
 
 import styled from 'styled-components';
 
-const Fragment = styled.div`
+export const FragmentListItemWrapper = styled.div`
     display: flex;
     border-bottom: 1px solid ${({ theme }) => theme.borderColor};
     color: ${({ theme }) => theme.textColor};
@@ -32,13 +32,13 @@ const Fragment = styled.div`
     }
 `;
 
-const StatusWrapper = styled.div`
+export const StatusWrapper = styled.div`
     height: 15px;
     width: 15px;
     margin: 2px;
 `;
 
-const Status = styled.div`
+export const Status = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -49,22 +49,12 @@ const Status = styled.div`
     background-color: ${({ status }) => ((status === 'other' || status === 'missing') ? '#ffbb00' : '')};
 `;
 
-const Id = styled.div`
+export const Id = styled.div`
     overflow: hidden;
     flex: 1;
     border-right: 1px solid ${({ theme }) => theme.borderColor};
 `;
 
-const Type = styled.div`
+export const Type = styled.div`
     flex: 1;
 `;
-
-const Styled = {
-  Fragment,
-  StatusWrapper,
-  Status,
-  Id,
-  Type,
-};
-
-export default Styled;

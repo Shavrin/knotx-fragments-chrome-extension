@@ -19,11 +19,11 @@ import Enzyme, { mount } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import * as data from './mockData.json';
+import * as data from './fragmentList.mock.json';
 import reducer from '../../state/reducers/index';
 import FragmentList from './fragmentList';
-import Fragment from './fragment';
-import NodeList from './nodeList';
+import FragmentListItem from './FragmentListItem/fragmentListItem';
+import NodeList from './NodeList/nodeList';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -38,7 +38,7 @@ describe('<FragmentList /> unit test', () => {
 
   it('should render exactly 5 fragments', () => {
     const wrapper = getWrapper();
-    expect(wrapper.find(Fragment))
+    expect(wrapper.find(FragmentListItem))
       .toHaveLength(5);
   });
 
@@ -46,7 +46,7 @@ describe('<FragmentList /> unit test', () => {
     const wrapper = getWrapper();
     expect(wrapper
       .findWhere(
-        (n) => n.name() === 'Fragment' && n.prop('status') === 'success',
+        (n) => n.name() === 'FragmentListItem' && n.prop('status') === 'success',
       ))
       .toHaveLength(1);
   });
@@ -55,7 +55,7 @@ describe('<FragmentList /> unit test', () => {
     const wrapper = getWrapper();
     expect(wrapper
       .findWhere(
-        (n) => n.name() === 'Fragment' && n.prop('status') === 'error',
+        (n) => n.name() === 'FragmentListItem' && n.prop('status') === 'error',
       ))
       .toHaveLength(1);
   });
@@ -64,7 +64,7 @@ describe('<FragmentList /> unit test', () => {
     const wrapper = getWrapper();
     expect(wrapper
       .findWhere(
-        (n) => n.name() === 'Fragment' && n.prop('status') === 'missing',
+        (n) => n.name() === 'FragmentListItem' && n.prop('status') === 'missing',
       ))
       .toHaveLength(1);
   });
@@ -73,7 +73,7 @@ describe('<FragmentList /> unit test', () => {
     const wrapper = getWrapper();
     expect(wrapper
       .findWhere(
-        (n) => n.name() === 'Fragment' && n.prop('status') === 'unprocessed',
+        (n) => n.name() === 'FragmentListItem' && n.prop('status') === 'unprocessed',
       ))
       .toHaveLength(1);
   });
@@ -82,7 +82,7 @@ describe('<FragmentList /> unit test', () => {
     const wrapper = getWrapper();
     expect(wrapper
       .findWhere(
-        (n) => n.name() === 'Fragment' && n.prop('status') === 'other',
+        (n) => n.name() === 'FragmentListItem' && n.prop('status') === 'other',
       ))
       .toHaveLength(1);
   });
@@ -90,14 +90,14 @@ describe('<FragmentList /> unit test', () => {
   it('should render node list under each fragment', () => {
     const wrapper = getWrapper();
     expect(wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .contains(NodeList)).toEqual(true);
   });
 
   it('nodelist should not be expanded by default', () => {
     const wrapper = getWrapper();
     expect(wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .first()
       .find(NodeList)
       .prop('expanded')).toEqual(false);
@@ -106,12 +106,12 @@ describe('<FragmentList /> unit test', () => {
   it('nodelist should be displayed after first click', () => {
     const wrapper = getWrapper();
     wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .first()
       .simulate('click');
 
     expect(wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .first()
       .find(NodeList)
       .prop('expanded')).toEqual(true);
@@ -120,13 +120,13 @@ describe('<FragmentList /> unit test', () => {
   it('nodelist should not be displayed after second click', () => {
     const wrapper = getWrapper();
     wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .first()
       .simulate('click')
       .simulate('click');
 
     expect(wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .first()
       .find(NodeList)
       .prop('expanded')).toEqual(false);
@@ -135,7 +135,7 @@ describe('<FragmentList /> unit test', () => {
   it('first fragment should render exactly 2 nodes in nodelist', () => {
     const wrapper = getWrapper();
     expect(wrapper
-      .find(Fragment)
+      .find(FragmentListItem)
       .first()
       .find('button')).toHaveLength(2);
   });

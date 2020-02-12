@@ -16,11 +16,13 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Styled from './fragment.style';
-import NodeList from './nodeList';
-import ENTER_KEY_CODE from '../../helpers/constants';
+import {
+  FragmentListItemWrapper, Id, Status, StatusWrapper, Type,
+} from './fragmentListItem.style';
+import NodeList from '../NodeList/nodeList';
+import { ENTER_KEY_CODE } from '../../../helpers/constants';
 
-const Fragment = ({
+const FragmentListItem = ({
   status, id, type, nodes,
 }) => {
   const [expanded, setExpanded] = useState(false);
@@ -36,33 +38,33 @@ const Fragment = ({
   }
 
   return (
-    <Styled.Fragment
+    <FragmentListItemWrapper
       tabIndex="0"
       onClick={handleClick}
       onKeyDown={handleEnter}
       expanded={expanded}
     >
-      <Styled.StatusWrapper>
-        <Styled.Status status={status} />
-      </Styled.StatusWrapper>
-      <Styled.Id>
+      <StatusWrapper>
+        <Status status={status} />
+      </StatusWrapper>
+      <Id>
         {id}
         <NodeList expanded={expanded}>{nodes}</NodeList>
-      </Styled.Id>
-      <Styled.Type>{type}</Styled.Type>
-    </Styled.Fragment>
+      </Id>
+      <Type>{type}</Type>
+    </FragmentListItemWrapper>
   );
 };
 
-Fragment.defaultProps = {
+FragmentListItem.defaultProps = {
   nodes: [],
 };
 
-Fragment.propTypes = {
+FragmentListItem.propTypes = {
   status: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   nodes: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default Fragment;
+export default FragmentListItem;
