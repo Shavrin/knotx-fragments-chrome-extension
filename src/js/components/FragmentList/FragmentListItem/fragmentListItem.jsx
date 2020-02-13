@@ -27,10 +27,6 @@ const FragmentListItem = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
 
-  function handleClick() {
-    setExpanded(!expanded);
-  }
-
   function handleEnter(event) {
     if (event.keyCode === ENTER_KEY_CODE) {
       setExpanded(!expanded);
@@ -40,7 +36,7 @@ const FragmentListItem = ({
   return (
     <FragmentListItemWrapper
       tabIndex="0"
-      onClick={handleClick}
+      onClick={setExpanded(!expanded)}
       onKeyDown={handleEnter}
       expanded={expanded}
     >
