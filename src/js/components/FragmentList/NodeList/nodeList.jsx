@@ -19,6 +19,8 @@ import propTypes from 'prop-types';
 import { NodeButton, NodeListWrapper } from './nodeList.style';
 
 const NodeList = ({ expanded, children }) => {
+  const highlightClass = 'knotx-devtool-highlight';
+
   function inspectNode(event, selector) {
     event.stopPropagation();
     chrome.devtools.inspectedWindow.eval(`inspect(document.querySelector('${selector}'))`);
@@ -30,7 +32,7 @@ const NodeList = ({ expanded, children }) => {
     chrome
       .devtools
       .inspectedWindow
-      .eval(`document.querySelector('${selector}').classList.add("knotx-devtool-highlight")`);
+      .eval(`document.querySelector('${selector}').classList.add("${highlightClass}")`);
   }
 
   function hideHighlightNode(event, selector) {
@@ -39,7 +41,7 @@ const NodeList = ({ expanded, children }) => {
     chrome
       .devtools
       .inspectedWindow
-      .eval(`document.querySelector('${selector}').classList.remove("knotx-devtool-highlight")`);
+      .eval(`document.querySelector('${selector}').classList.remove("${highlightClass}")`);
   }
 
   return (
