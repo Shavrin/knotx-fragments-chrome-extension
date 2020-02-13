@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-import { createStore } from 'redux';
-import reducers from './reducers/index';
-
-export const store = createStore(reducers);
+export const SET_PAGE_DATA = 'SET_PAGE_DATA';
+export const REMOVE_PAGE_DATA = 'REMOVE_PAGE_DATA';

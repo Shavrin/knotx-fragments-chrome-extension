@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "webpack",
     "watch": "watch 'yarn run dev'",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint -c .eslintrc.json 'src/js/**'",
+    "release": "node ./scripts/build.js",
+    "release:minor": "node ./scripts/build.js minor",
+    "release:major": "node ./scripts/build.js major",
+    "clean:artifacts": "rm -rf packages/*.zip"
   },
   "keywords": [
     "knot.x",
@@ -35,6 +40,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "archiver": "^3.1.1",
     "jest-junit-reporter": "^1.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
@@ -44,8 +50,8 @@
     "redux": "^4.0.5",
     "styled-components": "^5.0.1",
     "unique-selector": "^0.4.1",
+    "semver": "^7.1.2",
     "vis-network": "^7.2.0",
-    "watch": "^1.0.2",
     "webext-redux": "^2.1.6"
   },
   "jest": {

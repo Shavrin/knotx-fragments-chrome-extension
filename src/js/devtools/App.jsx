@@ -16,20 +16,25 @@
 
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types';
 import FragmentList from '../components/FragmentList/fragmentList';
 import { defaultTheme, darkTheme } from './themes';
 
-const App = () => {
+const App = ({ tabId }) => {
   const { themeName: chromeTheme } = chrome.devtools.panels;
   const theme = chromeTheme === 'default' ? defaultTheme : darkTheme;
 
   return (
     <ThemeProvider theme={theme}>
       <div className="app">
-        <FragmentList />
+        <FragmentList tabId={tabId} />
       </div>
     </ThemeProvider>
   );
+};
+
+App.propTypes = {
+  tabId: PropTypes.number.isRequired,
 };
 
 export default App;
