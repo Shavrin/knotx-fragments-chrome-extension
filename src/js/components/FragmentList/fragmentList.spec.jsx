@@ -21,7 +21,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import data from './fragmentList.mock';
 import reducer from '../../state/reducers/index';
-import FragmentList, { mapDataToComponents, sortFragmentsByStatus } from './fragmentList';
+import FragmentList, { mapDataToComponents } from './fragmentList';
 import FragmentListItem from './FragmentListItem/fragmentListItem';
 import NodeList from './NodeList/nodeList';
 import { SortingButton } from './fragmentList.style';
