@@ -23,12 +23,12 @@ export const FragmentListItemWrapper = styled.div`
     background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
 
     &:nth-child(2n + 1) {
-      background-color: ${({ theme }) => theme.oddFragmentBgColor};;
-      background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
+        background-color: ${({ theme }) => theme.oddFragmentBgColor};;
+        background-color: ${({ expanded, theme }) => (expanded ? theme.fragmentHighlight : '')};
     }
 
     &:hover, &:focus{
-      background-color: ${({ theme }) => theme.fragmentHighlight};
+        background-color: ${({ theme }) => theme.fragmentHighlight};
     }
 `;
 

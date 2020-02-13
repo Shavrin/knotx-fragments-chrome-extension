@@ -17,9 +17,9 @@
 import styled from 'styled-components';
 
 export const FragmentListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 `;
 
 export const SortingWrapper = styled.div`
@@ -27,14 +27,14 @@ export const SortingWrapper = styled.div`
 `;
 
 export const SortingButton = styled.button`
-      border: 0;
-      margin: 2px;
-      padding: 2px;
-      color: ${({ theme }) => theme.textColor};
-      background-color: ${({ theme }) => theme.buttonBgColor};
-      &:active {
+    border: 0;
+    margin: 2px;
+    padding: 2px;
+    color: ${({ theme }) => theme.textColor};
+    background-color: ${({ theme }) => theme.buttonBgColor};
+    &:active {
         background-color: ${({ theme }) => theme.fragmentHighlight};
-      }
-      flex: ${({ status }) => (status ? '' : 1)};
-      width: ${({ status }) => (status ? '15px' : '')};
+    }
+    flex: ${({ status }) => (status ? '' : 1)};
+    width: ${({ status }) => (status ? '15px' : '')};
 `;

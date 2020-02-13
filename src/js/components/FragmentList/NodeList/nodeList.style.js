@@ -29,14 +29,14 @@ export const NodeButton = styled.button`
     border-bottom: 1px solid ${({ theme }) => theme.borderColor};
 
     &:hover {
-      background-color: ${({ theme }) => theme.nodeHighlight};
+        background-color: ${({ theme }) => theme.nodeHighlight};
     }
 
     &:nth-child(2n + 1) {
-      background-color: ${({ theme }) => theme.oddNodeBgColor};
+        background-color: ${({ theme }) => theme.oddNodeBgColor};
 
-      &:hover {
-        background-color: ${({ theme }) => theme.nodeHighlight};
-      }
+        &:hover {
+            background-color: ${({ theme }) => theme.nodeHighlight};
+        }
     }
 `;
