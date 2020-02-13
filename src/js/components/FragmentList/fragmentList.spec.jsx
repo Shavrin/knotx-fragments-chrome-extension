@@ -32,7 +32,7 @@ describe('<FragmentList /> unit test', () => {
 
   const getWrapper = () => mount(
     <Provider store={mockStore}>
-      <FragmentList />
+      <FragmentList tabId={777} />
     </Provider>,
   );
 

@@ -16,13 +16,14 @@
 
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import propTypes from 'prop-types';
 import {
   FragmentListWrapper, SortingButton, SortingWrapper,
 } from './fragmentList.style';
 import FragmentListItem from './FragmentListItem/fragmentListItem';
 import { ARROW_DOWN } from '../../helpers/constants';
 
-export function mapDataToComponents({ fragments }) {
+export function mapDataToComponents(fragments) {
   return fragments.map(({ debug, nodes }) => {
     const { fragment } = debug;
     return (
@@ -52,20 +53,13 @@ export function sortFragmentsByStatus(fragments) {
   return sortedFragments;
 }
 
-const FragmentList = () => {
-  const data = useSelector(({ pageData }) => pageData);
+const FragmentList = ({ tabId }) => {
+  const data = useSelector((state) => state.pageData[tabId].fragments);
   const parsedData = mapDataToComponents(data);
   const [fragments, setFragments] = useState(parsedData);
 
-  const typeSortComparator = (
-    { props: { type: typeA } },
-    { props: { type: typeB } },
-  ) => typeA.localeCompare(typeB);
-
-  const idSortComparator = (
-    { props: { id: idA } },
-    { props: { id: idB } },
-  ) => idA.localeCompare(idB);
+  const typeSortComparator = (a, b) => a.props.type.localeCompare(b.props.type);
+  const idSortComparator = (a, b) => a.props.id.localeCompare(b.props.id);
 
   return (
     <FragmentListWrapper>
@@ -95,6 +89,10 @@ const FragmentList = () => {
       {fragments}
     </FragmentListWrapper>
   );
+};
+
+FragmentList.propTypes = {
+  tabId: propTypes.number.isRequired,
 };
 
 export default FragmentList;
