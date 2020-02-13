@@ -26,22 +26,11 @@ const NodeList = ({ expanded, children }) => {
     chrome.devtools.inspectedWindow.eval(`inspect(document.querySelector('${selector}'))`);
   }
 
-  function highlightNode(event, selector) {
-    event.preventDefault();
-    event.stopPropagation();
+  function toggleHighlightNode(event, selector) {
     chrome
       .devtools
       .inspectedWindow
-      .eval(`document.querySelector('${selector}').classList.add("${highlightClass}")`);
-  }
-
-  function hideHighlightNode(event, selector) {
-    event.preventDefault();
-    event.stopPropagation();
-    chrome
-      .devtools
-      .inspectedWindow
-      .eval(`document.querySelector('${selector}').classList.remove("${highlightClass}")`);
+      .eval(`document.querySelector('${selector}').classList.toggle("${highlightClass}")`);
   }
 
   return (
@@ -50,8 +39,8 @@ const NodeList = ({ expanded, children }) => {
         <NodeButton
           key={node.selector}
           onClick={(event) => { inspectNode(event, node.selector); }}
-          onMouseEnter={(event) => { highlightNode(event, node.selector); }}
-          onMouseLeave={(event) => { hideHighlightNode(event, node.selector); }}
+          onMouseEnter={(event) => { toggleHighlightNode(event, node.selector); }}
+          onMouseLeave={(event) => { toggleHighlightNode(event, node.selector); }}
         >
           {node.tag}
         </NodeButton>
