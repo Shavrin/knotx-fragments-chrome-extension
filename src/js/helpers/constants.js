@@ -41,6 +41,8 @@ export const COLORS = {
     ODD_NODE_BG_COLOR: '#add8e60e',
   },
 };
+
+export const ARROW_DOWN = String.fromCharCode(8595);
 // MESSAGES
 /* eslint-disable max-len */
 

@@ -20,6 +20,7 @@ import {
   FragmentListWrapper, SortingButton, SortingWrapper,
 } from './fragmentList.style';
 import FragmentListItem from './FragmentListItem/fragmentListItem';
+import { ARROW_DOWN } from '../../helpers/constants';
 
 export function mapDataToComponents({ fragments }) {
   return fragments.map(({ debug, nodes }) => {
@@ -73,19 +74,21 @@ const FragmentList = () => {
           status
           onClick={() => setFragments(sortFragmentsByStatus(fragments))}
         >
-          &darr;
+          {ARROW_DOWN}
         </SortingButton>
 
         <SortingButton
           onClick={() => setFragments(fragments.concat().sort(idSortComparator))}
         >
-          ID&darr;
+          ID
+          {ARROW_DOWN}
         </SortingButton>
 
         <SortingButton
           onClick={() => setFragments(fragments.concat().sort(typeSortComparator))}
         >
-          TYPE&darr;
+          TYPE
+          {ARROW_DOWN}
         </SortingButton>
 
       </SortingWrapper>
