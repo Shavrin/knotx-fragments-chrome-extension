@@ -18,19 +18,26 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { NodeButton, NodeListWrapper } from './nodeList.style';
 
-const NodeList = ({ expanded, children }) => {
-  const highlightClass = 'knotx-devtool-highlight';
+function evalInContentPage(code) {
+  chrome
+    .devtools
+    .inspectedWindow
+    .eval(code);
+}
 
+function toggleHighlightNode(selector) {
+  const highlightClass = 'knotx-devtool-highlight';
+  evalInContentPage(
+    `document.querySelector('${selector}').classList.toggle("${highlightClass}")`,
+  );
+}
+
+const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
     event.stopPropagation();
-    chrome.devtools.inspectedWindow.eval(`inspect(document.querySelector('${selector}'))`);
-  }
-
-  function toggleHighlightNode(event, selector) {
-    chrome
-      .devtools
-      .inspectedWindow
-      .eval(`document.querySelector('${selector}').classList.toggle("${highlightClass}")`);
+    evalInContentPage(
+      `inspect(document.querySelector('${selector}'))`,
+    );
   }
 
   return (
@@ -39,8 +46,8 @@ const NodeList = ({ expanded, children }) => {
         <NodeButton
           key={node.selector}
           onClick={(event) => { inspectNode(event, node.selector); }}
-          onMouseEnter={(event) => { toggleHighlightNode(event, node.selector); }}
-          onMouseLeave={(event) => { toggleHighlightNode(event, node.selector); }}
+          onMouseEnter={() => { toggleHighlightNode(node.selector); }}
+          onMouseLeave={() => { toggleHighlightNode(node.selector); }}
         >
           {node.tag}
         </NodeButton>
