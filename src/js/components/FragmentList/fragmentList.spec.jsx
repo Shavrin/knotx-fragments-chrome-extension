@@ -19,11 +19,12 @@ import Enzyme, { mount } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import * as data from './fragmentList.mock.json';
+import data from './fragmentList.mock';
 import reducer from '../../state/reducers/index';
-import FragmentList from './fragmentList';
+import FragmentList, { mapDataToComponents, sortFragmentsByStatus } from './fragmentList';
 import FragmentListItem from './FragmentListItem/fragmentListItem';
 import NodeList from './NodeList/nodeList';
+import { SortingButton } from './fragmentList.style';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -138,5 +139,70 @@ describe('<FragmentList /> unit test', () => {
       .find(FragmentListItem)
       .first()
       .find('button')).toHaveLength(2);
+  });
+
+  it('mapDataToComponents should create proper React objects', () => {
+    const generatedComponents = mapDataToComponents(data[777].fragments);
+    expect(generatedComponents).toHaveLength(5);
+    generatedComponents.forEach((element) => {
+      expect(element).toHaveProperty('props');
+      expect(element.props).toHaveProperty('id');
+      expect(element.props).toHaveProperty('type');
+      expect(element.props).toHaveProperty('status');
+    });
+  });
+
+  it('sorting by status works', () => {
+    const wrapper = getWrapper();
+    expect(wrapper
+      .find(FragmentListItem)
+      .first()
+      .prop('status')).toEqual('error');
+
+    wrapper
+      .find(SortingButton)
+      .at(0)
+      .simulate('click');
+
+    expect(wrapper
+      .find(FragmentListItem)
+      .first()
+      .prop('status')).toEqual('success');
+  });
+
+  it('sorting by type works', () => {
+    const wrapper = getWrapper();
+    expect(wrapper
+      .find(FragmentListItem)
+      .first()
+      .prop('type')).toEqual('E');
+
+    wrapper
+      .find(SortingButton)
+      .at(1)
+      .simulate('click');
+
+    expect(wrapper
+      .find(FragmentListItem)
+      .first()
+      .prop('type')).toEqual('A');
+  });
+
+  it('sorting by id works', () => {
+    const wrapper = getWrapper();
+    expect(wrapper
+      .find(FragmentListItem)
+      .first()
+      .prop('id')).toEqual('E');
+
+    wrapper
+      .find(SortingButton)
+      .at(2)
+      .simulate('click');
+
+    expect(wrapper
+      .find(FragmentListItem)
+      .first()
+      .prop('id')).toEqual('A');
   });
 });
