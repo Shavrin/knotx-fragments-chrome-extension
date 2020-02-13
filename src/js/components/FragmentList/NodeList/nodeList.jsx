@@ -25,7 +25,6 @@ function evalInContentPage(code) {
     .eval(code);
 }
 
-
 const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
     event.stopPropagation();
