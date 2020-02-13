@@ -15,16 +15,13 @@ Thumbs.db
 **/build/
 **/out/
 
-# Visual Studio Code #
-######################
-.vscode
-
 # Other              #
 ######################
 *.iml
 *.iws
 *.ipr
 *.vlt
+.vscode
 
 # Build              #
 ######################
@@ -38,6 +35,5 @@ node_modules
 
 dist/js/*
 yarn-error.log
-.vscode
 test-report.xml
 packages/*
