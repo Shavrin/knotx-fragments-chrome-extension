@@ -36,7 +36,7 @@ const FragmentListItem = ({
   return (
     <FragmentListItemWrapper
       tabIndex="0"
-      onClick={setExpanded(!expanded)}
+      onClick={() => setExpanded(!expanded)}
       onKeyDown={handleEnter}
       expanded={expanded}
     >
