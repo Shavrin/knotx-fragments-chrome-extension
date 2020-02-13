@@ -25,18 +25,19 @@ function evalInContentPage(code) {
     .eval(code);
 }
 
-function toggleHighlightNode(selector) {
-  const highlightClass = 'knotx-devtool-highlight';
-  evalInContentPage(
-    `document.querySelector('${selector}').classList.toggle("${highlightClass}")`,
-  );
-}
 
 const NodeList = ({ expanded, children }) => {
   function inspectNode(event, selector) {
     event.stopPropagation();
     evalInContentPage(
       `inspect(document.querySelector('${selector}'))`,
+    );
+  }
+
+  function toggleHighlightNode(selector) {
+    const highlightClass = 'knotx-devtool-highlight';
+    evalInContentPage(
+      `document.querySelector('${selector}').classList.toggle("${highlightClass}")`,
     );
   }
 
