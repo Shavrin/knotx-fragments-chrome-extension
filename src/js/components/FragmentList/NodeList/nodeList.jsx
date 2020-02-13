@@ -34,10 +34,15 @@ const NodeList = ({ expanded, children }) => {
     );
   }
 
-  function toggleHighlightNode(selector) {
-    const highlightClass = 'knotx-devtool-highlight';
+  function hideNodeHighlight(selector) {
     evalInContentPage(
-      `document.querySelector('${selector}').classList.toggle("${highlightClass}")`,
+      `document.querySelector('${selector}').style.setProperty("background-color","")`,
+    );
+  }
+
+  function highlightNode(selector) {
+    evalInContentPage(
+      `document.querySelector('${selector}').style.setProperty("background-color","lightblue","important")`,
     );
   }
 
@@ -47,8 +52,8 @@ const NodeList = ({ expanded, children }) => {
         <NodeButton
           key={node.selector}
           onClick={(event) => { inspectNode(event, node.selector); }}
-          onMouseEnter={() => { toggleHighlightNode(node.selector); }}
-          onMouseLeave={() => { toggleHighlightNode(node.selector); }}
+          onMouseEnter={() => { highlightNode(node.selector); }}
+          onMouseLeave={() => { hideNodeHighlight(node.selector); }}
         >
           {node.tag}
         </NodeButton>

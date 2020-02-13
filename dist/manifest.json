@@ -7,11 +7,9 @@
     "scripts": ["js/background.js"],
     "persistent": false
   },
-  "web_accessible_resources": ["highlight.css"],
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "css": ["highlight.css"],
       "js": ["js/content.js"]
     }
   ],
